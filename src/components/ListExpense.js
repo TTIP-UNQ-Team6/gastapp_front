@@ -5,7 +5,8 @@ const ListExpense = (props) => {
   return (
     <TouchableOpacity style={styles.item}>
         <View style={styles.view}>
-            <Text style={styles.itemText}> {props.item.precio} </Text>
+            <Text style={styles.itemText}> {props.item.category} </Text>
+            <Text style={styles.itemText}> {props.item.amount} </Text>
         </View>
     </TouchableOpacity>
     );  

@@ -10,6 +10,7 @@
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/native": "^5.1.5",
+    "axios": "^0.19.2",
     "expo": "~37.0.3",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -25,5 +26,18 @@
     "babel-preset-expo": "~8.1.0",
     "@babel/core": "^7.8.6"
   },
-  "private": true
+  "private": true,
+  "name": "gastapp_front",
+  "description": "<p align=\"center\"> \r   <img width=\"300\" height=\"300\" src=\"https://raw.githubusercontent.com/TTIP-UNQ-Team6/gastapp_doc/master/icon.png\">\r </p>",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TTIP-UNQ-Team6/gastapp_front.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TTIP-UNQ-Team6/gastapp_front/issues"
+  },
+  "homepage": "https://github.com/TTIP-UNQ-Team6/gastapp_front#readme"
 }
