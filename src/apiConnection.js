@@ -1,9 +1,14 @@
-import axios from 'axios';
+const server = 'http://192.168.0.153:5000';
 
-const server = 'http://localhost:5000';
+const get = (path, body) => {
+  var url = new URL(`${server}${path}`)
+  Object.keys(body).forEach(key => url.searchParams.append(key, body[key]))
 
-const request = (type, path, body) => axios
-  .request({ url: `${server}${path}`, method: type, data: body })
-  .then(req => req.data);
+  return fetch(url.toString()).then(res => { return res.json()})
+}
 
-export const getAllExpenses = body => request('get', '/expense/get_all');
+const post = () => {
+  
+}
+
+export const getAllExpenses = body => { return get('/expense/get_all', body) };

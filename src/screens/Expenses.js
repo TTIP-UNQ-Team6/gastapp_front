@@ -2,8 +2,7 @@ import React, { Component, useState } from 'react';
 import { StyleSheet, FlatList, View, Text } from 'react-native';
 import Header from '../components/Header';
 import ListExpense from '../components/ListExpense';
-import getAllExpenses from '../apiConnection';
-import axios from 'axios';
+import { getAllExpenses } from '../apiConnection';
 
 class Expenses extends Component {
 
@@ -15,11 +14,10 @@ class Expenses extends Component {
   }
 
   loadExpenses = async () => {
-    //http://dummy.restapiexample.com/api/v1/employees
-    return fetch('http://192.168.0.153:5000/expense/get_all')
-    .then(res => res.json())
-    .then(res => this.setState({expenses: res}))
-    .catch(e => console.log(e));
+    const body = {
+      id_user: '2',
+    }
+    getAllExpenses(body).then(res => this.setState({expenses: res}))
   }
 
   componentDidMount() {
