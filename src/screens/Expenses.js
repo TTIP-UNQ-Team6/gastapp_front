@@ -17,7 +17,7 @@ class Expenses extends Component {
     const body = {
       id_user: '2',
     }
-    getAllExpenses(body).then(res => this.setState({expenses: res}))
+    getAllExpenses(body).then(res => this.setState({expenses: res})).then(res => console.log(this.state.expenses))
   }
 
   componentDidMount() {
@@ -36,8 +36,12 @@ class Expenses extends Component {
       return (
         <View>
           <Header title="Gastapp"/>
-          {console.log("Estado ", this.state)}
-          <FlatList data={this.state.expenses} renderItem={({item}) => <ListExpense item={item}></ListExpense>}/>
+          <FlatList 
+            data={this.state.expenses} 
+            contentContainerStyle={{ paddingBottom: 20}} 
+            renderItem={({item}) => <ListExpense item={item}></ListExpense>}
+            keyExtractor={(item) => item._id.$oid}
+          />
         </View>
       )
   }

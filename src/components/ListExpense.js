@@ -1,14 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { ListItem } from 'react-native-elements'
+import icons from '../icons'
+
 
 const ListExpense = (props) => {
   return (
-    <TouchableOpacity style={styles.item}>
-        <View style={styles.view}>
-            <Text style={styles.itemText}> {props.item.category} </Text>
-            <Text style={styles.itemText}> {props.item.amount} </Text>
-        </View>
-    </TouchableOpacity>
+      <TouchableOpacity>
+            <View>
+                <ListItem
+                    leftIcon={icons[props.item.category]}
+                    title={props.item.category}
+                    titleStyle={styles.title}
+                    subtitle={props.item.date}
+                    subtitleStyle={props.item.subtitle}
+                    rightTitle={`$${props.item.amount}`}
+                    bottomDivider
+                />
+            </View>
+        </TouchableOpacity>
     );  
 }
 
@@ -24,9 +34,14 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       alignItems: 'center'
   },
-  itemText: {
-      fontSize: 18,
+  title: {
+      fontSize: 15,
+      color: 'black'
   },
+  subtitle: {
+      fontSize: 20,
+      color: 'black'
+  }
 });
 
 export default ListExpense;
