@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { StyleSheet, FlatList, View, Text } from 'react-native';
+import { StyleSheet, FlatList, View, Text, Picker } from 'react-native';
 import Header from '../components/Header';
 import ListExpense from '../components/ListExpense';
 import { getAllExpenses } from '../apiConnection';
@@ -9,7 +9,9 @@ class Expenses extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expenses: []
+      expenses: [],
+      category: 'all',
+      categories: ['all', 'clothes', 'food']
     }
   }
 
@@ -36,7 +38,21 @@ class Expenses extends Component {
       return (
         <View>
           <Header title="Gastapp"/>
+          <Text style={styles.titlePicker}>
+            Select a category
+          </Text>
+          <View style={styles.picker}>
+            <Picker
+              selectedValue={this.state.category}
+              onValueChange={(category) => this.setState({category: category})}
+            >
+              {this.state.categories.map(
+                (item, key) => (<Picker.Item label={item} value={item} key={key} />)
+              )}
+            </Picker>
+          </View>
           <FlatList 
+            contentContainerStyle = {{borderBottomWidth: 0, borderTopWidth: 0}}
             data={this.state.expenses} 
             contentContainerStyle={{ paddingBottom: 20}} 
             renderItem={({item}) => <ListExpense item={item}></ListExpense>}
@@ -46,5 +62,18 @@ class Expenses extends Component {
       )
   }
 }
+
+const styles = StyleSheet.create({
+  picker: {
+      marginLeft:5,
+      marginRight:5,
+      borderColor: 'black',
+      borderWidth: 1,
+      borderRadius: 10,
+  },
+  titlePicker: {
+    marginLeft:10,
+  }
+});
 
 export default Expenses;
