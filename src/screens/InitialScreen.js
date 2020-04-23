@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
-import { Expenses } from './Expenses'
+import ExpensesScreen from './ExpensesScreen'
 
 export default class InitialScreen extends Component {
 
@@ -10,7 +10,7 @@ export default class InitialScreen extends Component {
 
   changeScreen() {
     return (
-      <Expenses/>
+      <ExpensesScreen/>
     )
   }
 

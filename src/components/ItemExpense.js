@@ -4,7 +4,7 @@ import { ListItem } from 'react-native-elements'
 import icons from '../icons'
 
 
-const ListExpense = (props) => {
+const ItemExpense = (props) => {
   return (
       <TouchableOpacity>
             <View>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ListExpense;
+export default ItemExpense;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import InitialScreen from './src/screens/InitialScreen'
-import Expenses from './src/screens/Expenses'
+import ExpensesScreen from './src/screens/ExpensesScreen'
 
 const App = () => {
   return (
     <View style={styles.container}>
-        <Expenses/>
+        <ExpensesScreen/>
     </View>
   );
 }

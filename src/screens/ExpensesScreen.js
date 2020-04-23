@@ -1,42 +1,42 @@
 import React, { Component, useState } from 'react';
 import { StyleSheet, FlatList, View, Text, Picker } from 'react-native';
 import Header from '../components/Header';
-import ListExpense from '../components/ListExpense';
-import { getAllExpenses } from '../apiConnection';
+import ItemExpense from '../components/ItemExpense';
+import { getAllExpenses, getCategories, getExpensesByCategory } from '../gastappService';
 
-class Expenses extends Component {
+class ExpensesScreen extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      id_user: 2,
       expenses: [],
       category: 'all',
-      categories: ['all', 'clothes', 'food']
+      categories: ["all"]
     }
   }
 
-  loadExpenses = async () => {
-    const body = {
-      id_user: '2',
+  loadExpenses() {
+    if (this.state.category == "all") {
+      getAllExpenses(this.state.id_user).then(res => this.setState({expenses: res}))
     }
-    getAllExpenses(body).then(res => this.setState({expenses: res})).then(res => console.log(this.state.expenses))
+    else {
+      getExpensesByCategory(this.state.id_user, this.state.category).then(res => this.setState({expenses: res}))
+    }
+  }
+
+  loadCategories() {
+    getCategories().then(res => this.setState({categories: this.state.categories.concat(res)}))
   }
 
   componentDidMount() {
     this.loadExpenses();
+    this.loadCategories();
   }
 
-  data = () => {
-    return [
-      {id: 1, amount: 100},
-      {id: 2, amount: 200},
-      {id: 3, amount: 300},
-    ]
-  }
-
-  render() {
+  render = () => {
       return (
-        <View>
+        <View style={styles.view}>
           <Header title="Gastapp"/>
           <Text style={styles.titlePicker}>
             Select a category
@@ -44,7 +44,7 @@ class Expenses extends Component {
           <View style={styles.picker}>
             <Picker
               selectedValue={this.state.category}
-              onValueChange={(category) => this.setState({category: category})}
+              onValueChange={(category) => this.setState({category: category}, this.loadExpenses)}
             >
               {this.state.categories.map(
                 (item, key) => (<Picker.Item label={item} value={item} key={key} />)
@@ -52,10 +52,9 @@ class Expenses extends Component {
             </Picker>
           </View>
           <FlatList 
-            contentContainerStyle = {{borderBottomWidth: 0, borderTopWidth: 0}}
+            style={styles.list}
             data={this.state.expenses} 
-            contentContainerStyle={{ paddingBottom: 20}} 
-            renderItem={({item}) => <ListExpense item={item}></ListExpense>}
+            renderItem={({item}) => <ItemExpense item={item}></ItemExpense>}
             keyExtractor={(item) => item._id.$oid}
           />
         </View>
@@ -73,7 +72,13 @@ const styles = StyleSheet.create({
   },
   titlePicker: {
     marginLeft:10,
+  },
+  view: {
+    flex: 1,
+  },
+  list: {
+    paddingBottom: 20,
   }
 });
 
-export default Expenses;
+export default ExpensesScreen;
