@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import ExpensesScreen from './ExpensesScreen'
 
-export default class InitialScreen extends Component {
-
-  componentDidMount(){
-    //setTimeout( () => { return this.changeScreen }, 30000);
+export default class LoadingScreen extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      navigation: props.navigation
+    }
   }
 
-  changeScreen() {
-    return (
-      <ExpensesScreen/>
-    )
+  componentDidMount(){
+    //setTimeout( () => { this.state.navigation.navigate('ExpensesScreen') }, 300);
   }
 
   render() {
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor: "#52E0F6",
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     position: 'absolute',
@@ -45,13 +46,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     letterSpacing: 1,
     color: '#000000',
-    bottom: 380,
+    bottom: 420,
     textShadowColor: '#A9A9A9',
     textShadowRadius: 15,
   },
   logo: {
     width: 240,
     height: 240,
-    top: 80,
+    marginTop: 100
   },
 })

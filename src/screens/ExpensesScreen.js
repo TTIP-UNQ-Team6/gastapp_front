@@ -18,23 +18,23 @@ class ExpensesScreen extends Component {
   }
 
   loadAllExpenses() {
-    getAllExpenses(this.state.id_user).then(res => this.setState({expenses: res}))
+    getAllExpenses(this.state.id_user).then(res => this.setState({expenses: res})).catch(e => this.setState({expenses: []}));
   }
 
   loadCategoryExpenses() {
-    getExpensesByCategory(this.state.id_user, this.state.category).then(res => this.setState({expenses: res}))
+    getExpensesByCategory(this.state.id_user, this.state.category).then(res => this.setState({expenses: res})).catch(e => this.setState({expenses: []}));
   }
 
   loadCategories() {
-    getCategories().then(res => this.setState({categories: this.state.categories.concat(res)}));
+    getCategories().then(res => this.setState({categories: this.state.categories.concat(res)})).catch(e => this.setState({categories: ["all"]}));
   }
 
   loadTotalAndExpenses() {
     if (this.state.category == "all") {
-      getTotalAmount(this.state.id_user).then(res => this.setState({totalAmount: res[0]["total"]}, this.loadAllExpenses));
+      getTotalAmount(this.state.id_user).then(res => this.setState({totalAmount: res[0]["total"]}, this.loadAllExpenses)).catch(e => this.setState({totalAmount: 0}));
     }
     else {
-      getTotalCategoryAmount(this.state.id_user, this.state.category).then(res => this.setState({totalAmount: res[0]["total"]}, this.loadCategoryExpenses));
+      getTotalCategoryAmount(this.state.id_user, this.state.category).then(res => this.setState({totalAmount: res[0]["total"]}, this.loadCategoryExpenses)).catch(e => this.setState({totalAmount: 0}));
     }
   }
 
