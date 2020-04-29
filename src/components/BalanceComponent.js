@@ -1,10 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import AmountBalanceComponent from './AmountBalanceComponent'
 
 const BalanceComponent = (props) => {
     return (
         <View style={styles.view}>
-            <Text>Hola mundo</Text>
+            <AmountBalanceComponent text='Balance'/>
+            <View style={styles.horizontalView}>
+                <AmountBalanceComponent text='Ingresos'/>
+                <AmountBalanceComponent text='Gastos'/>
+            </View>
         </View>
     );
 }
@@ -12,12 +17,16 @@ const BalanceComponent = (props) => {
 const styles = StyleSheet.create({
     view: {
         backgroundColor: 'white',
-        height: 150,
+        height: 200,
+        flexDirection: 'column',
+        alignItems: 'center',
         marginHorizontal: 10,
         marginTop: 10,
         borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#EBEBEB'
+        elevation: 1
+    },
+    horizontalView: {
+        flexDirection: 'row'
     }
 });
 
