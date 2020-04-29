@@ -5,10 +5,10 @@ import AmountBalanceComponent from './AmountBalanceComponent'
 const BalanceComponent = (props) => {
     return (
         <View style={styles.view}>
-            <AmountBalanceComponent text='Balance'/>
+                <AmountBalanceComponent icon='balance' title='Balance' subtitle='$1001'/>
             <View style={styles.horizontalView}>
-                <AmountBalanceComponent text='Ingresos'/>
-                <AmountBalanceComponent text='Gastos'/>
+                <AmountBalanceComponent icon='up-arrow' title='Ingresos' subtitle='$5001'/>
+                <AmountBalanceComponent icon='down-arrow' title='Gastos' subtitle='$4000'/>
             </View>
         </View>
     );
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         height: 200,
         flexDirection: 'column',
         alignItems: 'center',
+        alignContent: 'center',
         marginHorizontal: 10,
         marginTop: 10,
         borderRadius: 10,

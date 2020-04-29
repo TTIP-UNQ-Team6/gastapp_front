@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import BalanceComponent from '../components/BalanceComponent'
+import ShortListComponent from '../components/ShortListComponent'
 import Header from '../components/Header';
 
 export default class MainScreen extends Component {
@@ -8,7 +9,7 @@ export default class MainScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            navigator: props.navigator,
+            navigation: props.navigation,
         }
     }
 
@@ -17,6 +18,7 @@ export default class MainScreen extends Component {
             <View style={styles.view}> 
                 <Header/>
                 <BalanceComponent/>
+                <ShortListComponent title="Ultimos gastos" navigation={this.state.navigation}/>
             </View>
         );
     }

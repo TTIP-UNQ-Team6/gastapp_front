@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { StyleSheet, FlatList, View, Text, Picker } from 'react-native';
 import Header from '../components/Header';
-import ItemExpense from '../components/ItemExpense';
+import ItemList from '../components/ItemList';
 import { getAllExpenses, getCategories, getExpensesByCategory, getTotalAmount, getTotalCategoryAmount } from '../gastappService';
 
 class ExpensesScreen extends Component {
@@ -67,7 +67,7 @@ class ExpensesScreen extends Component {
           <FlatList 
             style={styles.list}
             data={this.state.expenses} 
-            renderItem={({item}) => <ItemExpense item={item}></ItemExpense>}
+            renderItem={({item}) => <ItemList item={item}></ItemList>}
             keyExtractor={(item) => item._id.$oid}
           />
         </View>
