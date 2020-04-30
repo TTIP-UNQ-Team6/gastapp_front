@@ -1,25 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { ListItem } from 'react-native-elements'
-import icons from '../icons'
-
+import { getIcon } from '../icons'
 
 const ItemList = (props) => {
-  return (
-      <TouchableOpacity>
-            <View>
-                <ListItem
-                    leftIcon={icons[props.item.category]}
-                    title={props.item.category}
-                    titleStyle={styles.title}
-                    subtitle={props.item.date}
-                    subtitleStyle={props.item.subtitle}
-                    rightTitle={`$${props.item.amount}`}
-                    bottomDivider
-                />
-            </View>
-        </TouchableOpacity>
-    );  
+
+    return (
+        <TouchableOpacity>
+                <View>
+                    <ListItem
+                        leftIcon={props.icon ? getIcon(props.item.category) : undefined}
+                        title={props.item.category}
+                        titleStyle={styles.title}
+                        subtitle={props.item.date}
+                        subtitleStyle={styles.subtitle}
+                        rightTitle={`$${props.item.amount}`}
+                        bottomDivider
+                    />
+                </View>
+            </TouchableOpacity>
+        );  
 }
 
 const styles = StyleSheet.create({

@@ -5,10 +5,10 @@ import AmountBalanceComponent from './AmountBalanceComponent'
 const BalanceComponent = (props) => {
     return (
         <View style={styles.view}>
-                <AmountBalanceComponent icon='balance' title='Balance' subtitle='$1001'/>
+                <AmountBalanceComponent icon='balance' iconSize={45} title='Balance' subtitle='$1001'/>
             <View style={styles.horizontalView}>
-                <AmountBalanceComponent icon='up-arrow' title='Ingresos' subtitle='$5001'/>
-                <AmountBalanceComponent icon='down-arrow' title='Gastos' subtitle='$4000'/>
+                <AmountBalanceComponent icon='up-arrow' iconSize={45} title='Ingresos' subtitle='$5001'/>
+                <AmountBalanceComponent icon='down-arrow' iconSize={45} title='Gastos' subtitle='$4000'/>
             </View>
         </View>
     );

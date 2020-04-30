@@ -9,7 +9,7 @@ class ExpensesScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id_user: 2,
+      id_user: props.route.params.id_user,
       expenses: [],
       totalAmount: 0,
       category: 'all',
@@ -67,7 +67,7 @@ class ExpensesScreen extends Component {
           <FlatList 
             style={styles.list}
             data={this.state.expenses} 
-            renderItem={({item}) => <ItemList item={item}></ItemList>}
+            renderItem={({item}) => <ItemList item={item} icon={true}></ItemList>}
             keyExtractor={(item) => item._id.$oid}
           />
         </View>

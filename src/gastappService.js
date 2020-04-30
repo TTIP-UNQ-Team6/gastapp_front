@@ -1,4 +1,4 @@
-const server = 'http://192.168.0.236:5000';
+const server = 'http://192.168.0.153:5000';
 
 const get = (path, body={}) => {
   var url = new URL(`${server}${path}`)
@@ -16,3 +16,4 @@ export const getExpensesByCategory = (id_user, category) => { return get('/expen
 export const getCategories = body => { return get('/category/get_all') };
 export const getTotalAmount = id_user => { return get('/expense/get_total_by/user', {"id_user": id_user}) }
 export const getTotalCategoryAmount = (id_user, category) => { return get('/expense/get_total_by/category', {"id_user": id_user, "category": category}) };
+export const getLastestExpenses = id_user => { return get('/expense/get_lastest', {"id_user": id_user}) }

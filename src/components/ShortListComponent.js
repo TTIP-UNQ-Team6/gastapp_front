@@ -1,19 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import AmountBalanceComponent from './AmountBalanceComponent'
+import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
+import ItemList from './ItemList';
 
 const ShortListComponent = (props) => {
+
+    console.log("PROOOOOOOPS: ", props)
+
     return (
         <View style={styles.view}>
-            <View style={styles.container}>
+            <View style={styles.titleView}>
                 <Text style={styles.title}> {props.title} </Text>
-                <View>
-                    <Text> Gasto 1 </Text>
-                    <Text> Gasto 1 </Text>
-                    <Text> Gasto 1 </Text>
-                </View>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText} onPress={() => props.navigation.navigate('ExpensesScreen')} >
+            </View>
+            <View style={styles.listView}>
+                <FlatList 
+                    style={{padding: 0, margin: 0}}
+                    data={props.items} 
+                    renderItem={({ item }) => <ItemList item={item}></ItemList>}
+                    keyExtractor={(item) => item._id.$oid}
+                />
+            </View>
+            <View style={styles.buttonView}>
+                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('ExpensesScreen', {id_user: props.id_user})}>
+                    <Text style={styles.buttonText} >
                         Ver todos
                     </Text>
                 </TouchableOpacity>
@@ -26,8 +34,6 @@ const styles = StyleSheet.create({
     view: {
         backgroundColor: 'white',
         flexDirection: 'column',
-        alignItems: 'center',
-        alignContent: 'center',
         marginHorizontal: 10,
         marginTop: 10,
         borderRadius: 10,
@@ -37,7 +43,11 @@ const styles = StyleSheet.create({
         margin: 5,
         alignItems: 'center',
     },
+    titleView: {
+        borderBottomWidth: 0.3
+    },
     title: {
+        alignSelf: 'center',
         fontSize: 23,
     },
     button: {
@@ -45,11 +55,16 @@ const styles = StyleSheet.create({
         width: 120,
         paddingVertical: 5,
         borderRadius: 15,
-        margin: 0
+        margin: 10
+    },
+    buttonView: {
+        alignSelf: 'center',
     },
     buttonText: {
         textAlign: 'center',
         fontSize: 15
+    },
+    listView: {
     }
 });
 
