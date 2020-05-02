@@ -3,9 +3,6 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native
 import ItemList from './ItemList';
 
 const ShortListComponent = (props) => {
-
-    console.log("PROOOOOOOPS: ", props)
-
     return (
         <View style={styles.view}>
             <View style={styles.titleView}>
@@ -15,7 +12,7 @@ const ShortListComponent = (props) => {
                 <FlatList 
                     style={{padding: 0, margin: 0}}
                     data={props.items} 
-                    renderItem={({ item }) => <ItemList item={item}></ItemList>}
+                    renderItem={({ item }) => <ItemList icon={true} item={item} titleStyle={styles.itemTitle} subtitleStyle={styles.itemSubtitle}></ItemList>}
                     keyExtractor={(item) => item._id.$oid}
                 />
             </View>
@@ -44,7 +41,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     titleView: {
-        borderBottomWidth: 0.3
+        borderBottomWidth: 0.3,
+        borderBottomColor: '#A9A9A9',
     },
     title: {
         alignSelf: 'center',
@@ -65,7 +63,15 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     listView: {
-    }
+    },
+    itemTitle: {
+        fontSize: 10,
+        color: 'black'  
+    },
+    itemSubtitle: {
+        fontSize: 14,
+        color: 'black'
+    },
 });
 
 export default ShortListComponent;

@@ -32,6 +32,12 @@ const Main = () => {
         <Stack.Screen 
           name="ExpensesScreen" 
           component={ExpensesScreen}
+          options={
+            {
+              title: "Mis gastos",
+              headerTitleAlign: 'center'
+          }
+          }
         />
       </Stack.Navigator>
     </NavigationContainer>

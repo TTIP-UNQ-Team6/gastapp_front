@@ -31,7 +31,10 @@ class ExpensesScreen extends Component {
 
   loadTotalAndExpenses() {
     if (this.state.category == "all") {
-      getTotalAmount(this.state.id_user).then(res => this.setState({totalAmount: res[0]["total"]}, this.loadAllExpenses)).catch(e => this.setState({totalAmount: 0}));
+      getTotalAmount(this.state.id_user).then(res => {
+        console.log("RES: ", res)
+        this.setState({totalAmount: res[0]["total"]}, this.loadAllExpenses)
+      }).catch(e => this.setState({totalAmount: 0}));
     }
     else {
       getTotalCategoryAmount(this.state.id_user, this.state.category).then(res => this.setState({totalAmount: res[0]["total"]}, this.loadCategoryExpenses)).catch(e => this.setState({totalAmount: 0}));
@@ -46,7 +49,6 @@ class ExpensesScreen extends Component {
   render = () => {
       return (
         <View style={styles.view}>
-          <Header title="Gastapp"/>
           <View style={styles.totalView}>
             <Text style={styles.totalText}>Total:</Text>
             <Text style={styles.totalPrice}>${this.state.totalAmount}</Text>
