@@ -20,7 +20,7 @@ const AmountBalanceComponent = (props) => {
 
 const styles = StyleSheet.create({
     view: {
-        margin: 7,
+        margin: 5,
         width: 150,
         height: 85,
         flexDirection: 'row',

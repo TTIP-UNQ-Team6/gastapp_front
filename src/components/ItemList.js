@@ -16,6 +16,7 @@ const ItemList = (props) => {
                         subtitleStyle={props.subtitleStyle || styles.subtitle}
                         rightTitle={`$${props.item.amount}`}
                         bottomDivider
+                        containerStyle = {undefined || props.containerStyle}
                     />
                 </View>
             </TouchableOpacity>

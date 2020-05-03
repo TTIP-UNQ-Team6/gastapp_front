@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Header = (props) => {
+const HeaderComponent = (props) => {
 
   const title = props.title || "Gastapp"
 
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default HeaderComponent;

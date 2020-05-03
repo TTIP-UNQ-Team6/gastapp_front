@@ -1,6 +1,5 @@
 import React, { Component, useState } from 'react';
 import { StyleSheet, FlatList, View, Text, Picker } from 'react-native';
-import Header from '../components/Header';
 import ItemList from '../components/ItemList';
 import { getAllExpenses, getCategories, getExpensesByCategory, getTotalAmount, getTotalCategoryAmount } from '../gastappService';
 

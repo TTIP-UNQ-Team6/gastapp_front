@@ -12,7 +12,7 @@ const ShortListComponent = (props) => {
                 <FlatList 
                     style={{padding: 0, margin: 0}}
                     data={props.items} 
-                    renderItem={({ item }) => <ItemList icon={true} item={item} titleStyle={styles.itemTitle} subtitleStyle={styles.itemSubtitle}></ItemList>}
+                    renderItem={({ item }) => <ItemList icon={true} item={item} containerStyle={styles.itemContainerStyle} titleStyle={styles.itemTitle} subtitleStyle={styles.itemSubtitle}></ItemList>}
                     keyExtractor={(item) => item._id.$oid}
                 />
             </View>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         width: 120,
         paddingVertical: 5,
         borderRadius: 15,
-        margin: 10
+        margin: 5
     },
     buttonView: {
         alignSelf: 'center',
@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: 'black'
     },
+    itemContainerStyle: {
+        padding: 6,
+    }
 });
 
 export default ShortListComponent;

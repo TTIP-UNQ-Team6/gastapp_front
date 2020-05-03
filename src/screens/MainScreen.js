@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import BalanceComponent from '../components/BalanceComponent';
 import ShortListComponent from '../components/ShortListComponent';
-import Header from '../components/Header';
+import HeaderComponent from '../components/HeaderComponent';
+import FooterComponent from '../components/FooterComponent';
 import { getLastestExpenses } from '../gastappService';
+
 
 export default class MainScreen extends Component {
 
@@ -22,10 +24,13 @@ export default class MainScreen extends Component {
 
     render() {
         return (
-            <View style={styles.view}> 
-                <Header/>
-                <BalanceComponent/>
-                <ShortListComponent title="Ultimos gastos" navigation={this.state.navigation} items={this.state.lastestExpenses} id_user={this.state.id_user}/>
+            <View style={styles.view}>
+                <HeaderComponent/>
+                <ScrollView> 
+                    <BalanceComponent incomeAmount={4000} expenseAmount={2000}/>
+                    <ShortListComponent title="Ultimos gastos" navigation={this.state.navigation} items={this.state.lastestExpenses} id_user={this.state.id_user}/>
+                </ScrollView>
+                <FooterComponent navigation={this.state.navigation}/>
             </View>
         );
     }
@@ -33,6 +38,6 @@ export default class MainScreen extends Component {
 
 const styles = StyleSheet.create({
     view: {
-        flex: 0,
+        flex: 1,
     }
 })
