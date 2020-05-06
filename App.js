@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LoadingScreen from './src/screens/LoadingScreen';
 import ExpensesScreen from './src/screens/ExpensesScreen';
 import MainScreen from './src/screens/MainScreen';
+import AddExpenseScreen from './src/screens/AddExpenseScreen'
 
 
 const Stack = createStackNavigator();
@@ -36,7 +37,17 @@ const Main = () => {
             {
               title: "Mis gastos",
               headerTitleAlign: 'center'
+            }
           }
+        />
+        <Stack.Screen
+          name="AddExpenseScreen"
+          component={AddExpenseScreen}
+          options={
+            {
+              title: "Nuevo gasto",
+              headerTitleAlign: 'center'
+            }
           }
         />
       </Stack.Navigator>
