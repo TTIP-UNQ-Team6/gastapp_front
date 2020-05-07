@@ -1,4 +1,4 @@
-const server = 'http://192.168.0.153:5000';
+const server = 'http://192.168.0.236:5000';
 
 const get = (path, body={}) => {
   var url = new URL(`${server}${path}`)
