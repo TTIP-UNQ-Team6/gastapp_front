@@ -17,26 +17,40 @@ class ExpensesScreen extends Component {
   }
 
   loadAllExpenses() {
-    getAllExpenses(this.state.id_user).then(res => this.setState({expenses: res})).catch(e => this.setState({expenses: []}));
+    getAllExpenses(this.state.id_user)
+    .then(res => this.setState({expenses: res}))
+    .catch(e => this.setState({expenses: []}));
   }
 
   loadCategoryExpenses() {
-    getExpensesByCategory(this.state.id_user, this.state.category).then(res => this.setState({expenses: res})).catch(e => this.setState({expenses: []}));
+    console.log("Me llamaron")
+    getExpensesByCategory(this.state.id_user, this.state.category)
+    .then(res => this.setState({expenses: res}))
+    .catch(e => this.setState({expenses: []}));
   }
 
   loadCategories() {
-    getCategories().then(res => this.setState({categories: this.state.categories.concat(res)})).catch(e => this.setState({categories: ["all"]}));
+    getCategories()
+    .then(res => this.setState({categories: this.state.categories.concat(res)}))
+    .catch(e => this.setState({categories: ["all"]}));
+  }
+
+  loadTotalAmount() {
+    getTotalAmount(this.state.id_user).then(res => {this.setState({totalAmount: res[0]["total"]})}).catch(e => this.setState({totalAmount: 0}));
+  }
+
+  loadTotalAmountByCategory() {
+    getTotalCategoryAmount(this.state.id_user, this.state.category).then(res => this.setState({totalAmount: res[0]["total"]}, this.loadCategoryExpenses)).catch(e => this.setState({totalAmount: 0}));
   }
 
   loadTotalAndExpenses() {
     if (this.state.category == "all") {
-      getTotalAmount(this.state.id_user).then(res => {
-        console.log("RES: ", res)
-        this.setState({totalAmount: res[0]["total"]}, this.loadAllExpenses)
-      }).catch(e => this.setState({totalAmount: 0}));
+      this.loadTotalAmount();
+      this.loadAllExpenses();
     }
     else {
-      getTotalCategoryAmount(this.state.id_user, this.state.category).then(res => this.setState({totalAmount: res[0]["total"]}, this.loadCategoryExpenses)).catch(e => this.setState({totalAmount: 0}));
+      this.loadTotalAmountByCategory();
+      this.loadCategoryExpenses();
     }
   }
 

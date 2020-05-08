@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import BalanceComponent from '../components/BalanceComponent';
 import ShortListComponent from '../components/ShortListComponent';
 import HeaderComponent from '../components/HeaderComponent';
@@ -18,8 +18,16 @@ export default class MainScreen extends Component {
         }
     }
 
+    loadLastestExpenses() {
+        getLastestExpenses(this.state.id_user).then(res => this.setState({lastestExpenses: res}))
+    }
+
     componentDidMount(){
-        getLastestExpenses("2").then(res => this.setState({lastestExpenses: res}))
+        this.loadLastestExpenses();
+    }
+
+    updateScreen() {
+        this.loadLastestExpenses();
     }
 
     render() {
@@ -30,7 +38,7 @@ export default class MainScreen extends Component {
                     <BalanceComponent incomeAmount={4000} expenseAmount={2000}/>
                     <ShortListComponent title="Ultimos gastos" navigation={this.state.navigation} items={this.state.lastestExpenses} id_user={this.state.id_user}/>
                 </ScrollView>
-                <FooterComponent navigation={this.state.navigation}/>
+                <FooterComponent navigation={this.state.navigation} id_user={this.state.id_user} updateScreen={this.updateScreen.bind(this)}/>
             </View>
         );
     }

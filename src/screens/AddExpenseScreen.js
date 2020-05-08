@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Picker, TextInput, KeyboardAvoidingView, TouchableOpacity, Text} from 'react-native';
 import { getIcon } from '../icons'
-import { getCategories } from '../gastappService';
+import { getCategories, addExpense } from '../gastappService';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 class AddExpenseScreen extends Component {
@@ -10,7 +10,7 @@ class AddExpenseScreen extends Component {
         super(props);
         this.state = {
             navigation: props.navigation,
-            id_user: props.id_user,
+            id_user: props.route.params.id_user,
             categories: [],
             category: '',
             amount: 0,
@@ -44,11 +44,9 @@ class AddExpenseScreen extends Component {
             "description": this.state.description,
             "date": this.state.date.toDateString()
         }
-
-        console.log("Gasto:", expense);
-
+        addExpense(expense)
+        this.props.route.params.updateScreen()
         this.state.navigation.goBack();
-
     }
 
     render() {
