@@ -14,7 +14,6 @@ const post = (path, body) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   };
-  console.log(requestOptions)
   
   const url = new URL(`${server}${path}`);
   

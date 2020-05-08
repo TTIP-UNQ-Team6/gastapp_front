@@ -23,7 +23,6 @@ class ExpensesScreen extends Component {
   }
 
   loadCategoryExpenses() {
-    console.log("Me llamaron")
     getExpensesByCategory(this.state.id_user, this.state.category)
     .then(res => this.setState({expenses: res}))
     .catch(e => this.setState({expenses: []}));
