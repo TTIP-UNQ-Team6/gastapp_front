@@ -4,13 +4,14 @@ import { ListItem } from 'react-native-elements'
 import { getIcon } from '../icons'
 
 const ItemList = (props) => {
-
+    const date = new Date(props.item.date.$date)
+    
     return (
         <TouchableOpacity>
                 <View>
                     <ListItem
                         leftIcon={props.icon ? getIcon(props.item.category) : undefined}
-                        title={props.item.date}
+                        title={date.toLocaleDateString()}
                         titleStyle={props.titleStyle || styles.title}
                         subtitle={props.item.category}
                         subtitleStyle={props.subtitleStyle || styles.subtitle}

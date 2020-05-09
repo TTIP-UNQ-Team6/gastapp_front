@@ -42,8 +42,9 @@ class AddExpenseScreen extends Component {
             "amount": this.state.amount,
             "category": this.state.category,
             "description": this.state.description,
-            "date": this.state.date.toDateString()
+            "date": this.state.date.toISOString()
         }
+        
         addExpense(expense)
         this.props.route.params.updateScreen()
         this.state.navigation.goBack();
