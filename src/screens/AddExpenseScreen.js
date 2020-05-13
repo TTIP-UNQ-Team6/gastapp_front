@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Picker, TextInput, KeyboardAvoidingView, TouchableOpacity, Text} from 'react-native';
+import { View, StyleSheet, Picker, KeyboardAvoidingView, TouchableOpacity, Text} from 'react-native';
 import { getIcon } from '../icons'
 import { getCategories, addExpense } from '../gastappService';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import TextWithIconComponent from '../components/TextWithIconComponent'
+import CancelAcceptComponent from '../components/CancelAcceptComponent'
+
 
 class AddExpenseScreen extends Component {
 
@@ -36,6 +39,14 @@ class AddExpenseScreen extends Component {
         }
     }
 
+    chageAmount(amount) {
+        this.setState({amount: text})
+    }
+
+    chageDescription(description) {
+        this.setState({description: description})
+    }
+
     submitExpense() {
         const expense = {
             "id_user": this.state.id_user,
@@ -50,13 +61,16 @@ class AddExpenseScreen extends Component {
         this.state.navigation.goBack();
     }
 
+    cancelExpense() {
+        this.state.navigation.goBack()
+    }
+
     render() {
         return (
             <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.view}>
-                <View style={styles.inputBox}>
-                    <View style={styles.iconView}>{getIcon("exp-amount", 50)}</View>
-                    <TextInput placeholder="Monto" keyboardType='numeric' placeholderTextColor="#c4c6c8" style={styles.textInputs} onChangeText={(text) => this.setState({amount: text})}/>
-                </View>
+                
+                <TextWithIconComponent iconName="exp-amount" iconSize={50} keyboardType='numeric' placeholder="Monto" onChange={this.chageAmount.bind(this)} />
+
                 <View style={styles.inputBox}>
                     <View style={styles.iconView}>{getIcon("exp-date", 50)}</View>
                     <View style={styles.pickerView}>
@@ -70,10 +84,9 @@ class AddExpenseScreen extends Component {
                         </Picker>
                     </View>
                 </View>
-                <View style={styles.inputBox}>
-                    <View style={styles.iconView}>{getIcon("exp-description", 50)}</View>
-                    <TextInput placeholder="Descripcion" placeholderTextColor="#c4c6c8" style={styles.textInputs} onChangeText={(text) => this.setState({description: text})}/>
-                </View>
+
+                <TextWithIconComponent iconName="exp-description" iconSize={50} keyboardType='default' placeholder="Descripcion" onChange={this.chageDescription.bind(this)} />
+
                 <View style={styles.inputBox}>
                     <View style={styles.iconView}>{getIcon("exp-date", 50)}</View>
                     <TouchableOpacity onPress={() => this.setState({showDatePicker: true})} style={styles.buttonDate}>
@@ -89,18 +102,7 @@ class AddExpenseScreen extends Component {
                     />}
                 </View>
 
-                <View style={styles.buttonsView}>
-                        <TouchableOpacity style={styles.bottomButtons} onPress={() => this.state.navigation.goBack()}> 
-                            <Text style={styles.bottomButtonsText}>
-                                Cancelar
-                            </Text> 
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.bottomButtons} onPress={() => this.submitExpense()}> 
-                            <Text style={styles.bottomButtonsText}>
-                                Aceptar
-                            </Text> 
-                        </TouchableOpacity>
-                </View>
+                <CancelAcceptComponent onAccept={this.submitExpense.bind(this)} onCancel={this.cancelExpense.bind(this)} />
 
             </KeyboardAvoidingView>
         );
@@ -108,13 +110,6 @@ class AddExpenseScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    view: {
-        backgroundColor: '#fff',
-        elevation: 1,
-        margin: 10,
-        borderRadius: 10,
-        flex: 1,
-    },
     inputBox: {
         flexDirection: 'row',
         width: '80%',
@@ -124,6 +119,13 @@ const styles = StyleSheet.create({
         borderColor: '#c4c6c8',
         borderBottomWidth: 1,
         alignSelf: 'center',
+    },
+    view: {
+        backgroundColor: '#fff',
+        elevation: 1,
+        margin: 10,
+        borderRadius: 10,
+        flex: 1,
     },
     textInputs: {
         height: 65,
@@ -152,25 +154,6 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         paddingVertical: 14
     },
-    buttonsView: {
-        flex: 1,
-        flexDirection: 'row',
-        alignSelf: 'center',
-        alignItems: 'center'
-    },
-    bottomButtons: {
-        marginHorizontal: 10,
-        backgroundColor: '#1E90FF',
-        borderRadius: 10,
-        width: '40%',
-        height: '30%'
-    },
-    bottomButtonsText: {
-        color: 'white',
-        fontSize: 19,
-        textAlign: 'center',
-        padding: '8%'
-    }
 })
 
 export default AddExpenseScreen;
