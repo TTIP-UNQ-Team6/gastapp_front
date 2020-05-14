@@ -4,17 +4,16 @@ import { getIcon } from '../icons'
 
 const TextWithIconComponent = (props) => {
     return (
-        <View style={styles.inputBox}>
-            <View style={styles.iconView}>{getIcon(props.iconName, props.iconSize)}</View>
-            <TextInput placeholder="Monto" keyboardType={props.keyboardType} placeholderTextColor="#c4c6c8" style={styles.textInputs} onChangeText={(text) => props.onChange(text)}/>
+        <View style={styles(props.backgroundColor).inputBox}>
+            <View style={styles().iconView}>{getIcon(props.iconName, props.iconSize, props.iconColor)}</View>
+            <TextInput placeholder={props.placeholder} keyboardType={props.keyboardType} placeholderTextColor="#c4c6c8" style={styles().textInputs} onChangeText={(text) => props.onChange(text)}/>
         </View>
         );  
 }
 
-const styles = StyleSheet.create({
+const styles = (backgroundColor) => StyleSheet.create({
     textInputs: {
         height: 65,
-        backgroundColor: 'white',
         borderRadius: 4,
         color: 'black',
         fontSize: 17,
@@ -28,8 +27,8 @@ const styles = StyleSheet.create({
     inputBox: {
         flexDirection: 'row',
         width: '80%',
-        backgroundColor: 'white',
-        borderRadius: 4,
+        backgroundColor: backgroundColor || 'white',
+        borderRadius: 8,
         marginTop: 20,
         borderColor: '#c4c6c8',
         borderBottomWidth: 1,

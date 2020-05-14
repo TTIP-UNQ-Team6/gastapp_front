@@ -15,6 +15,8 @@ export function getIcon(name, size, color) {
         "exp-category" : <Icon name="file-cabinet" size={size || 30} color={color ||"#A9A9A9"} />,
         "exp-description" : <Icon name="file-document-outline" size={size || 30} color={color ||"#A9A9A9"} />,
         "exp-date" : <Icon name="calendar-range" size={size || 30} color={color ||"#A9A9A9"} />,
+        "user" : <Icon name="account" size={size || 30} color={color ||"#A9A9A9"} />,
+        "password" : <Icon name="lock-outline" size={size || 30} color={color ||"#A9A9A9"} />,
         
     };
 
