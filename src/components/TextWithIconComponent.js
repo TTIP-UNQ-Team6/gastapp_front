@@ -3,17 +3,20 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import { getIcon } from '../icons'
 
 const TextWithIconComponent = (props) => {
+
+    console.log("Altura: ", props);
+
     return (
-        <View style={styles(props.backgroundColor).inputBox}>
-            <View style={styles().iconView}>{getIcon(props.iconName, props.iconSize, props.iconColor)}</View>
-            <TextInput placeholder={props.placeholder} keyboardType={props.keyboardType} placeholderTextColor="#c4c6c8" style={styles().textInputs} onChangeText={(text) => props.onChange(text)}/>
+        <View style={styles(props).inputBox}>
+            <View style={styles(props).iconView}>{getIcon(props.iconName, props.iconSize, props.iconColor)}</View>
+            <TextInput placeholder={props.placeholder} keyboardType={props.keyboardType} placeholderTextColor="#c4c6c8" style={styles(props).textInputs} onChangeText={(text) => props.onChange(text)}/>
         </View>
         );  
 }
 
-const styles = (backgroundColor) => StyleSheet.create({
+const styles = (props) => StyleSheet.create({
     textInputs: {
-        height: 65,
+        height: '100%',
         borderRadius: 4,
         color: 'black',
         fontSize: 17,
@@ -27,7 +30,8 @@ const styles = (backgroundColor) => StyleSheet.create({
     inputBox: {
         flexDirection: 'row',
         width: '80%',
-        backgroundColor: backgroundColor || 'white',
+        height: props.height || '11.5%',
+        backgroundColor: props.backgroundColor || 'white',
         borderRadius: 8,
         marginTop: 20,
         borderColor: '#c4c6c8',

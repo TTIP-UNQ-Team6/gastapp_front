@@ -5,7 +5,7 @@ import CancelAcceptComponent from '../components/CancelAcceptComponent'
 import CustomButtom from '../components/CustomButton';
 import { View } from 'native-base';
 
-class LoginScreen extends Component {
+class RegisterScree extends Component {
 
     constructor(props) {
         super(props);
@@ -23,13 +23,15 @@ class LoginScreen extends Component {
                 source={require('../../resources/icon.jpg')}
                 />
 
-                <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} height='10%' keyboardType='default' placeholder="Usuario" backgroundColor={'#46C4D7'} onChange={() => console.log("cambie")} />
+                <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} height='9%' keyboardType='default' placeholder="Usuario" backgroundColor={'#46C4D7'} onChange={() => console.log("cambie")} />
 
-                <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} height='10%' keyboardType='default' placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={() => console.log("cambie")} />
+                <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} height='9%' keyboardType='default' placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={() => console.log("cambie")} />
+
+                <TextWithIconComponent iconName="email" iconSize={50} iconColor={'#6F6F6F'} height='9%' keyboardType='default' placeholder="Email" backgroundColor={'#48C7DB'} onChange={() => console.log("cambie")} />
 
                 <View style={styles.buttonsView}>
-                    <CustomButtom text='Iniciar sesion' onPress={() => console.log("Me llamaron")}/>
-                    <CustomButtom text='Registrarse' onPress={() => this.state.navigation.push("RegisterScreen")}/>
+                    <CustomButtom text='Registrarse' onPress={() => console.log("Me llamaron")}/>
+                    <CustomButtom text='Iniciar sesion' onPress={() => this.state.navigation.navigate("LoginScreen")}/>
                 </View>
                 
 
@@ -54,9 +56,9 @@ const styles = StyleSheet.create({
     buttonsView: {
         flexDirection: 'column',
         flex: 2,
-        marginTop: '5%'
+        marginTop: '5%',
     }
 
 })
 
-export default LoginScreen;
+export default RegisterScree;

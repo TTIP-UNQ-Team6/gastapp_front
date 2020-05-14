@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     view: {
         alignSelf: 'center',
         width: '80%',
-        margin: '1%'
+        margin: '1%',
     },
     button: {
         backgroundColor: '#1E90FF',
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 19,
         textAlign: 'center',
-        paddingVertical: '5%'
+        paddingVertical: '4%'
     }
 })
 

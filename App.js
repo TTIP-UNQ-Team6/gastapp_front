@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { createRootNavigator } from './src/router';
+import { NavigationContainer } from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import LoginScreen from './src/screens/LoginScreen'
+import RegisterScreen from './src/screens/RegisterScreen'
+
+const Stack = createStackNavigator();
 
 export default class App extends Component {
   constructor(props) {
@@ -11,7 +16,25 @@ export default class App extends Component {
   }
 
   render() {
-    return createRootNavigator(this.state.signedIn);
-  }
+    return (
+    <NavigationContainer>
+        <Stack.Navigator>
+            <Stack.Screen 
+                name="RegisterScreen" 
+                component={RegisterScreen}
+                options={
+                {headerShown: false}
+                }
+            />
+            <Stack.Screen 
+                name="LoginScreen" 
+                component={LoginScreen}
+                options={
+                {headerShown: false}
+                }
+            />
+        </Stack.Navigator>
+    </NavigationContainer>
+    )}
 
 }
