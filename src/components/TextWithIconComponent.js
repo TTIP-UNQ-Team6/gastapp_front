@@ -3,9 +3,6 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import { getIcon } from '../icons'
 
 const TextWithIconComponent = (props) => {
-
-    console.log("Altura: ", props);
-
     return (
         <View style={styles(props).inputBox}>
             <View style={styles(props).iconView}>{getIcon(props.iconName, props.iconSize, props.iconColor)}</View>

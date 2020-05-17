@@ -5,40 +5,37 @@ import CancelAcceptComponent from '../components/CancelAcceptComponent'
 import CustomButtom from '../components/CustomButton';
 import { View } from 'native-base';
 
-class RegisterScree extends Component {
+export function RegisterScreen({navigation}) {
+    
+    const { register } = React.useContext(AuthContext);
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [email, setEmail] = React.useState('');
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            navigation: props.navigation,
-        }
-    }
+    return (
+        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.view}>
+            
+            <Image
+            style={styles.logo}
+            source={require('../../resources/icon.jpg')}
+            />
 
-    render() {
-        return (
-            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.view}>
-                
-                <Image
-                style={styles.logo}
-                source={require('../../resources/icon.jpg')}
-                />
+            <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} height='9%' keyboardType='default' placeholder="Usuario" backgroundColor={'#46C4D7'} onChange={setUsername} />
 
-                <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} height='9%' keyboardType='default' placeholder="Usuario" backgroundColor={'#46C4D7'} onChange={() => console.log("cambie")} />
+            <TextWithIconComponent iconName="email" iconSize={50} iconColor={'#6F6F6F'} height='9%' keyboardType='default' placeholder="Email" backgroundColor={'#48C7DB'} onChange={setEmail} />
 
-                <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} height='9%' keyboardType='default' placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={() => console.log("cambie")} />
+            <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} height='9%' keyboardType='default' placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={setPassword} />
 
-                <TextWithIconComponent iconName="email" iconSize={50} iconColor={'#6F6F6F'} height='9%' keyboardType='default' placeholder="Email" backgroundColor={'#48C7DB'} onChange={() => console.log("cambie")} />
+            <View style={styles.buttonsView}>
+                <CustomButtom text='Registrarse' onPress={register(username, email, password)}/>
+                <CustomButtom text='Iniciar sesion' onPress={() => this.state.navigation.navigate("LoginScreen")}/>
+            </View>
+            
 
-                <View style={styles.buttonsView}>
-                    <CustomButtom text='Registrarse' onPress={() => console.log("Me llamaron")}/>
-                    <CustomButtom text='Iniciar sesion' onPress={() => this.state.navigation.navigate("LoginScreen")}/>
-                </View>
-                
-
-            </KeyboardAvoidingView>
-        );
-    }
+        </KeyboardAvoidingView>
+    );
 }
+
 
 const styles = StyleSheet.create({
     view: {
