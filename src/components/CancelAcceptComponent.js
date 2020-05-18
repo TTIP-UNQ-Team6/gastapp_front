@@ -4,12 +4,12 @@ import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 const CancelAcceptComponent = (props) => {
     return (
         <View style={styles.buttonsView}>
-            <TouchableOpacity style={styles.bottomButtons} onPress={() => props.cancelExpense()}> 
+            <TouchableOpacity style={styles.bottomButtons} onPress={() => props.onCancel()}> 
                 <Text style={styles.bottomButtonsText}>
                     Cancelar
                 </Text> 
             </TouchableOpacity>
-            <TouchableOpacity style={styles.bottomButtons} onPress={() => props.submitExpense()}> 
+            <TouchableOpacity style={styles.bottomButtons} onPress={() => props.onAccept()}> 
                 <Text style={styles.bottomButtonsText}>
                     Aceptar
                 </Text> 

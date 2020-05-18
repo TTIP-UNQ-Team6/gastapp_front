@@ -1,10 +1,10 @@
-const server = 'http://192.168.0.236:5000';
+const server = 'http://192.168.0.153:5000';
 
 const get = (path, body={}) => {
   var url = new URL(`${server}${path}`);
   Object.keys(body).forEach(key => url.searchParams.append(key, body[key]));
 
-  return fetch(url.toString()).then(res => { return res.json()})
+  return fetch(url.toString()).then(res => { return res.json() })
 }
 
 const post = (path, body) => {
@@ -17,13 +17,16 @@ const post = (path, body) => {
   
   const url = new URL(`${server}${path}`);
   
-  fetch(url, requestOptions).then(response => { return response.json() })
+  return fetch(url, requestOptions).then(res => res.json().then(data => { return {data: data, status: res.status } }))
+  
 }
 
-export const getAllExpenses = id_user => { return get('/expense/get_all', {"id_user": id_user}) };
-export const getExpensesByCategory = (id_user, category) => { return get('/expense/get_by/category', {"id_user": id_user, "category": category}) };
+export const getAllExpenses = user_email => { return get('/expense/get_all', {"email": user_email}) };
+export const getExpensesByCategory = (user_email, category) => { return get('/expense/get_by/category', {"email": user_email, "category": category}) };
 export const getCategories = body => { return get('/category/get_all') };
-export const getTotalAmount = id_user => { return get('/expense/get_total_by/user', {"id_user": id_user}) }
-export const getTotalCategoryAmount = (id_user, category) => { return get('/expense/get_total_by/category', {"id_user": id_user, "category": category}) };
-export const getLastestExpenses = id_user => { return get('/expense/get_lastest', {"id_user": id_user}) }
+export const getTotalAmount = user_email => { return get('/expense/get_total_by/user', {"email": user_email}) }
+export const getTotalCategoryAmount = (user_email, category) => { return get('/expense/get_total_by/category', {"email": user_email, "category": category}) };
+export const getLastestExpenses = user_email => { return get('/expense/get_lastest', {"email": user_email}) }
 export const addExpense = body => { return post('/expense/add', {"body": body}) }
+export const loginUser = (email, password) => { return post('/login', {"email": email, "password": password}) }
+export const registerUser = (username, email, password) => { return post('/register', {"name": username, "email": email, "password": password}) }

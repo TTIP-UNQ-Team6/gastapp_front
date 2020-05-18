@@ -6,21 +6,23 @@ import ExpensesScreen from './src/screens/ExpensesScreen';
 import MainScreen from './src/screens/MainScreen';
 import AddExpenseScreen from './src/screens/AddExpenseScreen'
 import { LoginScreen } from './src/screens/LoginScreen'
-import RegisterScreen from './src/screens/RegisterScreen'
+import { RegisterScreen } from './src/screens/RegisterScreen'
 import { AuthContext } from './src/context/AuthContext';
+import { loginUser, registerUser } from './src/gastappService'
 
 const AuthStack = createStackNavigator();
 const HomeStack = createStackNavigator();
 
-const HomeStackScreen = () => (
+const HomeStackScreen = (user) => (
     <HomeStack.Navigator>
         <HomeStack.Screen
             name="MainScreen"
-            component={MainScreen}
             options={
                 { headerShown: false }
             }
-        />
+        >
+             {props => <MainScreen {...props} user={user} />}
+        </HomeStack.Screen>
         <HomeStack.Screen
             name="LoadingScreen"
             component={LoadingScreen}
@@ -73,6 +75,8 @@ const AuthStackScreen = () => (
 export default () => {
 
     const [isLoading, setIsLogin] = React.useState(true);
+    const [user, setUser] = React.useState(null);
+    const [error, setError] = React.useState(null);
 
     React.useEffect(() => {
         setTimeout(() => {
@@ -80,19 +84,29 @@ export default () => {
         }, 1000)
     }, []);
     
-    const auth = React.useMemo(
+    var auth = React.useMemo(
         () => ({
             login: (username, password) => {
-                console.log(username, password);
+                loginUser(username, password).then(res => handleResponse(res));
             },
             logout: () => {
-                console.log("ayuda");
+                setUser(null);
             },
             register: (username, email, password) => {
-                console.log(username, email, password);
+                registerUser(username, email, password).then(res => handleResponse(res));
             },
         }),[],
     );
+
+    function handleResponse(res) {
+        if(String(res.status).charAt(0) == 2) {
+            setError(null);
+            setUser(res.data);
+        }
+        else {
+            setError(res.description)
+        }
+    }
 
     if (isLoading) {
         return <LoadingScreen />
@@ -100,23 +114,12 @@ export default () => {
 
     return (
         <AuthContext.Provider value={auth}>
-            <NavigationContainer>
-                <AuthStack.Navigator>
-                    <AuthStack.Screen
-                        name="LoginScreen"
-                        component={LoginScreen}
-                        options={
-                            { headerShown: false }
-                        }
-                    />
-                    <AuthStack.Screen
-                        name="RegisterScreen"
-                        component={RegisterScreen}
-                        options={
-                            { headerShown: false }
-                        }
-                    />
-                </AuthStack.Navigator>
+            <NavigationContainer >
+                {user ?
+                    <HomeStackScreen user={user}/>
+                :
+                    <AuthStackScreen/>
+                }
             </NavigationContainer>
         </AuthContext.Provider>
     )

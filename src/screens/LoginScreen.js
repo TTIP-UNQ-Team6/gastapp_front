@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, KeyboardAvoidingView, Image} from 'react-native';
-import TextWithIconComponent from '../components/TextWithIconComponent'
-import CancelAcceptComponent from '../components/CancelAcceptComponent'
+import TextWithIconComponent from '../components/TextWithIconComponent';
 import CustomButtom from '../components/CustomButton';
 import { View } from 'native-base';
 import { AuthContext } from '../context/AuthContext';
 
 export function LoginScreen({navigation}) {
 
-    const { login } = React.useContext(AuthContext);
+    const { user, login } = React.useContext(AuthContext);
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
 

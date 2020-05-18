@@ -4,6 +4,7 @@ import TextWithIconComponent from '../components/TextWithIconComponent'
 import CancelAcceptComponent from '../components/CancelAcceptComponent'
 import CustomButtom from '../components/CustomButton';
 import { View } from 'native-base';
+import { AuthContext } from '../context/AuthContext';
 
 export function RegisterScreen({navigation}) {
     
@@ -27,8 +28,8 @@ export function RegisterScreen({navigation}) {
             <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} height='9%' keyboardType='default' placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={setPassword} />
 
             <View style={styles.buttonsView}>
-                <CustomButtom text='Registrarse' onPress={register(username, email, password)}/>
-                <CustomButtom text='Iniciar sesion' onPress={() => this.state.navigation.navigate("LoginScreen")}/>
+                <CustomButtom text='Registrarse' onPress={() => register(username, email, password) }/>
+                <CustomButtom text='Iniciar sesion' onPress={() => navigation.navigate("LoginScreen")}/>
             </View>
             
 
@@ -57,5 +58,3 @@ const styles = StyleSheet.create({
     }
 
 })
-
-export default RegisterScree;

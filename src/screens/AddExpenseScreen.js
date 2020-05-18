@@ -13,7 +13,7 @@ class AddExpenseScreen extends Component {
         super(props);
         this.state = {
             navigation: props.navigation,
-            id_user: props.route.params.id_user,
+            user_email: props.route.params.user_email,
             categories: [],
             category: '',
             amount: 0,
@@ -40,7 +40,7 @@ class AddExpenseScreen extends Component {
     }
 
     chageAmount(amount) {
-        this.setState({amount: text})
+        this.setState({amount: amount})
     }
 
     chageDescription(description) {
@@ -48,17 +48,21 @@ class AddExpenseScreen extends Component {
     }
 
     submitExpense() {
+
+        console.log("EMAIL: ", this.state.user_email)
+
         const expense = {
-            "id_user": this.state.id_user,
+            "user_email": this.state.user_email,
             "amount": this.state.amount,
             "category": this.state.category,
             "description": this.state.description,
             "date": this.state.date.toISOString()
         }
-        
-        addExpense(expense)
-        this.props.route.params.updateScreen()
-        this.state.navigation.goBack();
+
+        addExpense(expense).then(res => {
+            this.props.route.params.updateScreen()
+            this.state.navigation.goBack();
+        })
     }
 
     cancelExpense() {

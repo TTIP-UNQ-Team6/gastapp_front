@@ -8,7 +8,7 @@ const FooterComponent = (props) => {
   return (
     <View style={styles.footer}>
         <View style={styles.plusIcon}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('AddExpenseScreen', {id_user: props.id_user, updateScreen: props.updateScreen})}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('AddExpenseScreen', {user_email: props.user_email, updateScreen: props.updateScreen})}>
                 {getIcon("plus", 53)}
             </TouchableOpacity>
         </View>
