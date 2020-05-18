@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native
 import ItemList from './ItemList';
 
 const ShortListComponent = (props) => {
+    
     return (
         <View style={styles.view}>
             <View style={styles.titleView}>

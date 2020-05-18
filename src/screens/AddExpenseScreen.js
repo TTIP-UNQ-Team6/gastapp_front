@@ -48,9 +48,6 @@ class AddExpenseScreen extends Component {
     }
 
     submitExpense() {
-
-        console.log("EMAIL: ", this.state.user_email)
-
         const expense = {
             "user_email": this.state.user_email,
             "amount": this.state.amount,
@@ -58,6 +55,9 @@ class AddExpenseScreen extends Component {
             "description": this.state.description,
             "date": this.state.date.toISOString()
         }
+
+        
+        console.log("EXPENSE: ", expense)
 
         addExpense(expense).then(res => {
             this.props.route.params.updateScreen()

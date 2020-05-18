@@ -8,7 +8,7 @@ class ExpensesScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id_user: props.route.params.id_user,
+      user_email: props.route.params.user_email,
       expenses: [],
       totalAmount: 0,
       category: 'all',
@@ -17,13 +17,13 @@ class ExpensesScreen extends Component {
   }
 
   loadAllExpenses() {
-    getAllExpenses(this.state.id_user)
+    getAllExpenses(this.state.user_email)
     .then(res => this.setState({expenses: res}))
     .catch(e => this.setState({expenses: []}));
   }
 
   loadCategoryExpenses() {
-    getExpensesByCategory(this.state.id_user, this.state.category)
+    getExpensesByCategory(this.state.user_email, this.state.category)
     .then(res => this.setState({expenses: res}))
     .catch(e => this.setState({expenses: []}));
   }
@@ -35,11 +35,11 @@ class ExpensesScreen extends Component {
   }
 
   loadTotalAmount() {
-    getTotalAmount(this.state.id_user).then(res => {this.setState({totalAmount: res[0]["total"]})}).catch(e => this.setState({totalAmount: 0}));
+    getTotalAmount(this.state.user_email).then(res => {this.setState({totalAmount: res[0]["total"]})}).catch(e => this.setState({totalAmount: 0}));
   }
 
   loadTotalAmountByCategory() {
-    getTotalCategoryAmount(this.state.id_user, this.state.category).then(res => this.setState({totalAmount: res[0]["total"]}, this.loadCategoryExpenses)).catch(e => this.setState({totalAmount: 0}));
+    getTotalCategoryAmount(this.state.user_email, this.state.category).then(res => this.setState({totalAmount: res[0]["total"]}, this.loadCategoryExpenses)).catch(e => this.setState({totalAmount: 0}));
   }
 
   loadTotalAndExpenses() {

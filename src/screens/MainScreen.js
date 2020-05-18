@@ -19,7 +19,7 @@ export default class MainScreen extends Component {
     }
 
     loadLastestExpenses() {
-        getLastestExpenses(this.state.id_user).then(res => this.setState({lastestExpenses: res}))
+        getLastestExpenses(this.state.user.email).then(res => this.setState({lastestExpenses: res}))
     }
 
     componentDidMount(){
@@ -31,9 +31,6 @@ export default class MainScreen extends Component {
     }
 
     render() {
-
-        console.log("EMAIL: ", this.state.user.email)
-
         return (
             <View style={styles.view}>
                 <HeaderComponent/>
