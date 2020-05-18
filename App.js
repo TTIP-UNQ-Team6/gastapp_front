@@ -76,7 +76,6 @@ export default () => {
 
     const [isLoading, setIsLogin] = React.useState(true);
     const [user, setUser] = React.useState(null);
-    const [error, setError] = React.useState(null);
 
     React.useEffect(() => {
         setTimeout(() => {
@@ -86,25 +85,25 @@ export default () => {
     
     var auth = React.useMemo(
         () => ({
-            login: (username, password) => {
-                loginUser(username, password).then(res => handleResponse(res));
+            login: (username, password, errorCallback) => {
+                loginUser(username, password).then(res => handleResponse(res, errorCallback));
             },
             logout: () => {
                 setUser(null);
             },
-            register: (username, email, password) => {
-                registerUser(username, email, password).then(res => handleResponse(res));
+            register: (username, email, password, errorCallback) => {
+                registerUser(username, email, password).then(res => handleResponse(res, errorCallback));
             },
         }),[],
     );
 
-    function handleResponse(res) {
+    function handleResponse(res, errorCallback) {
         if(String(res.status).charAt(0) == 2) {
-            setError(null);
             setUser(res.data);
         }
         else {
-            setError(res.description)
+            console.log("RESPUESTA: ", res)
+            errorCallback(res.data.description);
         }
     }
 

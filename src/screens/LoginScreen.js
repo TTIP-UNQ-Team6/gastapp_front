@@ -4,10 +4,12 @@ import TextWithIconComponent from '../components/TextWithIconComponent';
 import CustomButtom from '../components/CustomButton';
 import { View } from 'native-base';
 import { AuthContext } from '../context/AuthContext';
+import { ErrorComponent } from '../components/ErrorComponent';
 
 export function LoginScreen({navigation}) {
 
-    const { user, login } = React.useContext(AuthContext);
+    const { login } = React.useContext(AuthContext);
+    const [error, setError] = React.useState('');
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
 
@@ -19,12 +21,14 @@ export function LoginScreen({navigation}) {
             source={require('../../resources/icon.jpg')}
             />
 
+            <ErrorComponent error={error} />
+
             <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} height='10%' keyboardType='default' placeholder="Usuario" backgroundColor={'#46C4D7'} onChange={setUsername} />
 
             <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} height='10%' keyboardType='default' placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={setPassword} />
 
             <View style={styles.buttonsView}>
-                <CustomButtom text='Iniciar sesion' onPress={() => login(username, password)}/>
+                <CustomButtom text='Iniciar sesion' onPress={() => login(username, password, setError)}/>
                 <CustomButtom text='Registrarse' onPress={() => navigation.navigate("RegisterScreen")}/>
             </View>
             
