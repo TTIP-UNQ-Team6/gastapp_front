@@ -12,7 +12,7 @@ export function ErrorComponent({error}) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
+    paddingVertical: 1,
     alignSelf: 'center'
   },
   text: {

@@ -3,10 +3,13 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 const CustomButtom = (props) => {
 
+    console.log("props: ", props)
+    const styles = props.type == "secondary" ? secondaryStyles : principalStyles;
+
     return(
         <View style={styles.view}>
             <TouchableOpacity style={styles.button} onPress={() => props.onPress()}> 
-                <Text style={styles.bottomButtonsText}>
+                <Text style={styles.buttonText}>
                     {props.text}
                 </Text> 
             </TouchableOpacity>
@@ -15,7 +18,7 @@ const CustomButtom = (props) => {
 
 }
 
-const styles = StyleSheet.create({
+const principalStyles = StyleSheet.create({
     view: {
         alignSelf: 'center',
         width: '80%',
@@ -25,11 +28,28 @@ const styles = StyleSheet.create({
         backgroundColor: '#1E90FF',
         borderRadius: 10,
     },
-    bottomButtonsText: {
+    buttonText: {
         color: 'white',
         fontSize: 19,
         textAlign: 'center',
         paddingVertical: '4%'
+    }
+})
+
+const secondaryStyles = StyleSheet.create({
+    view: {
+        alignSelf: 'center',
+        width: '80%',
+        margin: '1%',
+    },
+    button: {
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16,
+        textAlign: 'center',
+        paddingVertical: '1%',
+        textDecorationLine: 'underline'
     }
 })
 

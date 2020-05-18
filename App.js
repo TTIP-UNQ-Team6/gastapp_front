@@ -86,13 +86,13 @@ export default () => {
     var auth = React.useMemo(
         () => ({
             login: (username, password, errorCallback) => {
-                loginUser(username, password).then(res => handleResponse(res, errorCallback));
+                loginUser(username, password).then(res => handleResponse(res, errorCallback)).catch(e => errorCallback(e.message));
             },
             logout: () => {
                 setUser(null);
             },
             register: (username, email, password, errorCallback) => {
-                registerUser(username, email, password).then(res => handleResponse(res, errorCallback));
+                registerUser(username, email, password).then(res => handleResponse(res, errorCallback)).catch(e => errorCallback(e.message));
             },
         }),[],
     );

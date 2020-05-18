@@ -34,6 +34,7 @@ const styles = (props) => StyleSheet.create({
         borderColor: '#c4c6c8',
         borderBottomWidth: 1,
         alignSelf: 'center',
+        flex: 1
     },
 });
 

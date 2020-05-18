@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, KeyboardAvoidingView, Image} from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, Image } from 'react-native';
 import TextWithIconComponent from '../components/TextWithIconComponent';
 import CustomButtom from '../components/CustomButton';
 import { View } from 'native-base';
 import { AuthContext } from '../context/AuthContext';
 import { ErrorComponent } from '../components/ErrorComponent';
 
-export function LoginScreen({navigation}) {
+export function LoginScreen({ navigation }) {
 
     const { login } = React.useContext(AuthContext);
     const [error, setError] = React.useState('');
@@ -15,23 +15,22 @@ export function LoginScreen({navigation}) {
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.view}>
-            
-            <Image
-            style={styles.logo}
-            source={require('../../resources/icon.jpg')}
-            />
 
-            <ErrorComponent error={error} />
-
-            <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} height='10%' keyboardType='default' placeholder="Usuario" backgroundColor={'#46C4D7'} onChange={setUsername} />
-
-            <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} height='10%' keyboardType='default' placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={setPassword} />
-
-            <View style={styles.buttonsView}>
-                <CustomButtom text='Iniciar sesion' onPress={() => login(username, password, setError)}/>
-                <CustomButtom text='Registrarse' onPress={() => navigation.navigate("RegisterScreen")}/>
+            <View style={styles.logoView}>
+                <Image style={styles.logo} source={require('../../resources/icon.jpg')}/>
             </View>
             
+            <ErrorComponent error={error} />
+
+            <View style={styles.inputsView}>
+                <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} keyboardType='default' placeholder="Usuario" backgroundColor={'#46C4D7'} onChange={setUsername} />
+                <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} keyboardType='default' placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={setPassword} />
+            </View>
+            <View style={styles.buttonsView}>
+                <CustomButtom text='Iniciar sesion' onPress={() => login(username, password, setError)} type="principal"/>
+                <CustomButtom text='Registrarse' onPress={() => navigation.navigate("RegisterScreen")} type="secondary"/>
+            </View>
+
 
         </KeyboardAvoidingView>
     );
@@ -45,15 +44,22 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     logo: {
-      width: 220,
-      height: 220,
-      marginTop: '0%',
-      alignSelf: 'center',
+        width: 220,
+        height: 220,
+        marginTop: '0%',
+    },
+    logoView: {
+        flex: 6,
+        alignSelf: 'center',
     },
     buttonsView: {
         flexDirection: 'column',
-        flex: 2,
-        marginTop: '5%'
+        flex: 3,
+        marginTop: '5%',
+        justifyContent: 'flex-end',
+    },    
+    inputsView: {
+        flex: 3.5,
+        marginBottom: 10
     }
-
 })
