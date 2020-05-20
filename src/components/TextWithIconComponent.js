@@ -27,14 +27,13 @@ const styles = (props) => StyleSheet.create({
     inputBox: {
         flexDirection: 'row',
         width: '80%',
-        height: props.height || '11.5%',
         backgroundColor: props.backgroundColor || 'white',
         borderRadius: 8,
         marginTop: 20,
         borderColor: '#c4c6c8',
         borderBottomWidth: 1,
         alignSelf: 'center',
-        flex: 1
+        flex: 0
     },
 });
 
