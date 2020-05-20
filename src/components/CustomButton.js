@@ -2,8 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 const CustomButtom = (props) => {
-
-    console.log("props: ", props)
     const styles = props.type == "secondary" ? secondaryStyles : principalStyles;
 
     return(

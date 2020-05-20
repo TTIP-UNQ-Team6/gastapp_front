@@ -6,7 +6,7 @@ const TextWithIconComponent = (props) => {
     return (
         <View style={styles(props).inputBox}>
             <View style={styles(props).iconView}>{getIcon(props.iconName, props.iconSize, props.iconColor)}</View>
-            <TextInput placeholder={props.placeholder} keyboardType={props.keyboardType} placeholderTextColor="#c4c6c8" style={styles(props).textInputs} onChangeText={(text) => props.onChange(text)}/>
+            <TextInput placeholder={props.placeholder} keyboardType={props.keyboardType || 'default'} secureTextEntry={props.password || false} placeholderTextColor="#c4c6c8" style={styles(props).textInputs} onChangeText={(text) => props.onChange(text)}/>
         </View>
         );  
 }

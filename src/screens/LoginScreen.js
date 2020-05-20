@@ -22,8 +22,8 @@ export function LoginScreen({ navigation }) {
             
             <ErrorComponent error={error} />
 
-            <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} keyboardType='default' placeholder="Usuario" backgroundColor={'#46C4D7'} onChange={setUsername} />
-            <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} keyboardType='default' placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={setPassword} />
+            <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} placeholder="Usuario" backgroundColor={'#46C4D7'} onChange={setUsername} />
+            <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} password={true} placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={setPassword} />
         
             <View style={styles.buttonsView}>
                 <CustomButtom text='Iniciar sesion' onPress={() => login(username, password, setError)} type="principal"/>

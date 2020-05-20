@@ -55,9 +55,9 @@ export function RegisterScreen({ navigation }) {
 
             <ErrorComponent error={error} />
 
-            <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} keyboardType='default' placeholder="Nombre" backgroundColor={'#46C4D7'} onChange={setUsername} />
-            <TextWithIconComponent iconName="email" iconSize={50} iconColor={'#6F6F6F'} keyboardType='default' placeholder="Email" backgroundColor={'#48C7DB'} onChange={setEmail} />
-            <TextWithIconComponent iconName="password" iconSize={45} iconColor={'#6F6F6F'} keyboardType='default' placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={setPassword} />
+            <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} placeholder="Nombre" backgroundColor={'#46C4D7'} onChange={setUsername} />
+            <TextWithIconComponent iconName="email" iconSize={50} iconColor={'#6F6F6F'} placeholder="Email" backgroundColor={'#48C7DB'} onChange={setEmail} />
+            <TextWithIconComponent iconName="password" iconSize={45} iconColor={'#6F6F6F'} placeholder="Contraseña" password={true} backgroundColor={'#48C7DB'} onChange={setPassword} />
         
 
             <View style={styles.buttonsView}>
