@@ -5,7 +5,7 @@ import CustomButtom from '../components/CustomButton';
 import { View } from 'native-base';
 import { AuthContext } from '../context/AuthContext';
 import { ErrorComponent } from '../components/ErrorComponent';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export function LoginScreen({ navigation }) {
 

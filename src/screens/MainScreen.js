@@ -15,6 +15,7 @@ export default class MainScreen extends Component {
             user: props.user.user,
             navigation: props.navigation,
             lastestExpenses: [],
+            lastestIncomes: [],
         }
     }
 
@@ -22,12 +23,18 @@ export default class MainScreen extends Component {
         getLastestExpenses(this.state.user.email).then(res => this.setState({lastestExpenses: res}))
     }
 
+    loadLastestIncomes() {
+        
+    }
+
     componentDidMount(){
         this.loadLastestExpenses();
+        this.loadLastestIncomes();
     }
 
     updateScreen() {
         this.loadLastestExpenses();
+        this.loadLastestIncomes();
     }
 
     render() {
@@ -37,6 +44,7 @@ export default class MainScreen extends Component {
                 <ScrollView> 
                     <BalanceComponent incomeAmount={4000} expenseAmount={2000}/>
                     <ShortListComponent title="Ultimos gastos" navigation={this.state.navigation} items={this.state.lastestExpenses} user_email={this.state.user.email}/>
+                    <ShortListComponent title="Ultimos ingresos" navigation={this.state.navigation} items={this.state.lastestIncomes} user_email={this.state.user.email}/>
                 </ScrollView>
                 <FooterComponent navigation={this.state.navigation} user_email={this.state.user.email} updateScreen={this.updateScreen.bind(this)}/>
             </View>

@@ -1,20 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { getIcon } from '../icons';
-import { Button } from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import HiddenButtonsComponent from './HiddenButtonsComponent';
 
 const FooterComponent = (props) => {
-  return (
-    <View style={styles.footer}>
-        <View style={styles.plusIcon}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('AddExpenseScreen', {user_email: props.user_email, updateScreen: props.updateScreen})}>
-                {getIcon("plus", 53)}
-            </TouchableOpacity>
+    const [show, setShow] = React.useState(false);
+    return (
+        <View>
+            {show &&
+                <HiddenButtonsComponent 
+                    onAddExpense={() => { props.navigation.navigate('AddExpenseScreen', {user_email: props.user_email, updateScreen: props.updateScreen}) }} 
+                    onAddIncome={() => { props.navigation.navigate('AddIncomeScreen', {user_email: props.user_email, updateScreen: props.updateScreen}) }} 
+                />
+            }
+            <View style={styles.footer}>
+                <View style={styles.plusIcon}>
+                    <TouchableOpacity onPress={() => { setShow(!show) }}>
+                        {getIcon("plus", 53)}
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
-    </View>
-    );  
+    );
 }
+
 
 const styles = StyleSheet.create({
     footer: {
@@ -22,7 +32,7 @@ const styles = StyleSheet.create({
         height: 55,
         backgroundColor: "#fff",
         borderTopLeftRadius: 20,
-        borderTopRightRadius: 20
+        borderTopRightRadius: 20,
     },
     plusIcon: {
         alignSelf: 'center',

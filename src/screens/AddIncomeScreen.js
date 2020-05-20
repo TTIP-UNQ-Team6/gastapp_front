@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Picker, KeyboardAvoidingView } from 'react-native';
-import { getIcon } from '../icons'
-import { getCategories, addExpense } from '../gastappService';
+import { View, StyleSheet, Picker, KeyboardAvoidingView, TouchableOpacity, Text} from 'react-native';
+import { getIcon } from '../icons';
+import { getCategories, addIncome } from '../gastappService';
 import TextWithIconComponent from '../components/TextWithIconComponent';
 import CancelAcceptComponent from '../components/CancelAcceptComponent';
 import DatePickerComponent from '../components/DatePickerComponent';
 import CategoryPickerComponent from '../components/CategoryPickerComponent';
 
-class AddExpenseScreen extends Component {
+class AddIncomeScreen extends Component {
 
     constructor(props) {
         super(props);
@@ -33,26 +33,26 @@ class AddExpenseScreen extends Component {
     }
 
     changeDate(event) {
-        this.setState({showDatePicker: false})
+        this.setState({showDatePicker: false});
         if(event.type == "set") {
-            this.setState({date: new Date(event.nativeEvent.timestamp)})
+            this.setState({date: new Date(event.nativeEvent.timestamp)});
         }
     }
 
     chageAmount(amount) {
-        this.setState({amount: amount})
+        this.setState({amount: amount});
     }
 
     chageDescription(description) {
-        this.setState({description: description})
+        this.setState({description: description});
     }
 
     changeCategory(category) {
         this.setState({category: category});
     }
 
-    submitExpense() {
-        const expense = {
+    submitIncome() {
+        const income = {
             "user_email": this.state.user_email,
             "amount": this.state.amount,
             "category": this.state.category,
@@ -60,14 +60,14 @@ class AddExpenseScreen extends Component {
             "date": this.state.date.toISOString()
         }
 
-        addExpense(expense).then(res => {
+        addIncome(income).then(res => {
             this.props.route.params.updateScreen()
             this.state.navigation.goBack();
         })
     }
 
-    cancelExpense() {
-        this.state.navigation.goBack()
+    cancelIncome() {
+        this.state.navigation.goBack();
     }
 
     render() {
@@ -82,7 +82,7 @@ class AddExpenseScreen extends Component {
 
                 <DatePickerComponent onChange={this.changeDate.bind(this)} initialDate={this.state.date}/>
 
-                <CancelAcceptComponent onAccept={this.submitExpense.bind(this)} onCancel={this.cancelExpense.bind(this)} />
+                <CancelAcceptComponent onAccept={this.submitIncome.bind(this)} onCancel={this.cancelIncome.bind(this)} showDatePicker={this.state.showDatePicker}/>
 
             </KeyboardAvoidingView>
         );
@@ -124,16 +124,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         flex: 8
     },
-    buttonDate: {
-        flex: 8,
-        backgroundColor: "#0000",
-    },
-    textButtonDate: {
-        color: 'black',
-        fontSize: 17,
-        textAlignVertical: 'center',
-        paddingVertical: 14
-    },
+
 })
 
-export default AddExpenseScreen;
+export default AddIncomeScreen;

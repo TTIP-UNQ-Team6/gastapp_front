@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 19,
         textAlign: 'center',
-        padding: '8%'
+        padding: '11%'
     }
 });
 

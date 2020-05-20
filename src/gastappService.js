@@ -24,9 +24,10 @@ const post = (path, body) => {
 export const getAllExpenses = user_email => { return get('/expense/get_all', {"user_email": user_email}) };
 export const getExpensesByCategory = (user_email, category) => { return get('/expense/get_by/category', {"user_email": user_email, "category": category}) };
 export const getCategories = body => { return get('/category/get_all') };
-export const getTotalAmount = user_email => { return get('/expense/get_total_by/user', {"user_email": user_email}) }
+export const getTotalAmount = user_email => { return get('/expense/get_total_by/user', {"user_email": user_email}) };
 export const getTotalCategoryAmount = (user_email, category) => { return get('/expense/get_total_by/category', {"user_email": user_email, "category": category}) };
-export const getLastestExpenses = user_email => { return get('/expense/get_lastest', {"user_email": user_email}) }
+export const getLastestExpenses = user_email => { return get('/expense/get_lastest', {"user_email": user_email}) };
 export const addExpense = body => { return post('/expense/add', {"body": body}) }
-export const loginUser = (email, password) => { return post('/login', {"email": email, "password": password}) }
-export const registerUser = (username, email, password) => { return post('/register', {"name": username, "email": email, "password": password}) }
+export const addIncome = body => { return({}) };
+export const loginUser = (email, password) => { return post('/login', {"email": email, "password": password}) };
+export const registerUser = (username, email, password) => { return post('/register', {"name": username, "email": email, "password": password}) };
