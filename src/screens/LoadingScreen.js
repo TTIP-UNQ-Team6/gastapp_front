@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
-import ExpensesScreen from './ExpensesScreen'
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, Image } from 'react-native';
 
 export default class LoadingScreen extends Component {
   
@@ -9,10 +8,6 @@ export default class LoadingScreen extends Component {
     this.state = {
       navigation: props.navigation
     }
-  }
-
-  componentDidMount(){
-    //setTimeout( () => { this.state.navigation.navigate('ExpensesScreen') }, 300);
   }
 
   render() {

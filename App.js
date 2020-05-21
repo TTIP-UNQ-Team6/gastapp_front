@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoadingScreen from './src/screens/LoadingScreen';
-import ExpensesScreen from './src/screens/ExpensesScreen';
+import HistoryScreen from './src/screens/HistoryScreen';
 import MainScreen from './src/screens/MainScreen';
 import AddExpenseScreen from './src/screens/AddExpenseScreen';
 import AddIncomeScreen from './src/screens/AddIncomeScreen';
@@ -33,10 +33,20 @@ const HomeStackScreen = (user) => (
         />
         <HomeStack.Screen
             name="ExpensesScreen"
-            component={ExpensesScreen}
+            component={HistoryScreen}
             options={
                 {
                     title: "Mis gastos",
+                    headerTitleAlign: 'center'
+                }
+            }
+        />
+        <HomeStack.Screen
+            name="IncomesScreen"
+            component={HistoryScreen}
+            options={
+                {
+                    title: "Mis ingresos",
                     headerTitleAlign: 'center'
                 }
             }
@@ -86,7 +96,7 @@ const AuthStackScreen = () => (
 export default () => {
 
     const [isLoading, setIsLogin] = React.useState(true);
-    const [user, setUser] = React.useState("null");
+    const [user, setUser] = React.useState(null);
 
     React.useEffect(() => {
         setTimeout(() => {
@@ -113,7 +123,6 @@ export default () => {
             setUser(res.data);
         }
         else {
-            console.log("RESPUESTA: ", res)
             errorCallback(res.data.description);
         }
     }

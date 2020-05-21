@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Picker, KeyboardAvoidingView, TouchableOpacity, Text} from 'react-native';
-import { getIcon } from '../icons';
-import { getCategories, addIncome } from '../gastappService';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { getIncomeCategories, addIncome } from '../gastappService';
 import TextWithIconComponent from '../components/TextWithIconComponent';
 import CancelAcceptComponent from '../components/CancelAcceptComponent';
 import DatePickerComponent from '../components/DatePickerComponent';
@@ -19,13 +18,12 @@ class AddIncomeScreen extends Component {
             amount: 0,
             date: new Date(Date.now()),
             description: "",
-            showDatePicker: false
         }
     }
 
 
     loadCategories() {
-        getCategories().then(res => this.setState({categories: res})).catch(e => this.setState({categories: []}));
+        getIncomeCategories().then(res => this.setState({categories: res})).catch(e => this.setState({categories: []}));
       }
 
     componentDidMount(){
@@ -33,7 +31,6 @@ class AddIncomeScreen extends Component {
     }
 
     changeDate(event) {
-        this.setState({showDatePicker: false});
         if(event.type == "set") {
             this.setState({date: new Date(event.nativeEvent.timestamp)});
         }
@@ -76,13 +73,13 @@ class AddIncomeScreen extends Component {
                 
                 <TextWithIconComponent iconName="exp-amount" iconSize={50} keyboardType='numeric' placeholder="Monto" onChange={this.chageAmount.bind(this)} />
 
-                <CategoryPickerComponent onChange={this.changeCategory.bind(this)} categories={this.state.categories}/>
+                <CategoryPickerComponent onChange={this.changeCategory.bind(this)} category={this.state.category} categories={this.state.categories}/>
 
                 <TextWithIconComponent iconName="exp-description" iconSize={50} keyboardType='default' placeholder="Descripcion" onChange={this.chageDescription.bind(this)} />
 
                 <DatePickerComponent onChange={this.changeDate.bind(this)} initialDate={this.state.date}/>
 
-                <CancelAcceptComponent onAccept={this.submitIncome.bind(this)} onCancel={this.cancelIncome.bind(this)} showDatePicker={this.state.showDatePicker}/>
+                <CancelAcceptComponent onAccept={this.submitIncome.bind(this)} onCancel={this.cancelIncome.bind(this)} />
 
             </KeyboardAvoidingView>
         );

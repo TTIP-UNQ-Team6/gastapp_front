@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Picker, KeyboardAvoidingView } from 'react-native';
-import { getIcon } from '../icons'
-import { getCategories, addExpense } from '../gastappService';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { getExpenseCategories, addExpense } from '../gastappService';
 import TextWithIconComponent from '../components/TextWithIconComponent';
 import CancelAcceptComponent from '../components/CancelAcceptComponent';
 import DatePickerComponent from '../components/DatePickerComponent';
@@ -19,13 +18,12 @@ class AddExpenseScreen extends Component {
             amount: 0,
             date: new Date(Date.now()),
             description: "",
-            showDatePicker: false
         }
     }
 
 
     loadCategories() {
-        getCategories().then(res => this.setState({categories: res})).catch(e => this.setState({categories: []}));
+        getExpenseCategories().then(res => this.setState({categories: res})).catch(e => this.setState({categories: []}));
       }
 
     componentDidMount(){
@@ -33,7 +31,6 @@ class AddExpenseScreen extends Component {
     }
 
     changeDate(event) {
-        this.setState({showDatePicker: false})
         if(event.type == "set") {
             this.setState({date: new Date(event.nativeEvent.timestamp)})
         }
