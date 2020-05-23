@@ -33,10 +33,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+        elevation: 50
     },
     plusIcon: {
         alignSelf: 'center',
-    }
+    },
 });
 
 export default FooterComponent;

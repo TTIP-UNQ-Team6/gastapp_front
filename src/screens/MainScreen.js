@@ -39,9 +39,9 @@ export default class MainScreen extends Component {
     }
 
     updateScreen() {
+        this.loadAmounts();
         this.loadLastestExpenses();
         this.loadLastestIncomes();
-        this.loadAmounts();
     }
 
     render() {
@@ -62,5 +62,5 @@ export default class MainScreen extends Component {
 const styles = StyleSheet.create({
     view: {
         flex: 1,
-    }
+    },
 })

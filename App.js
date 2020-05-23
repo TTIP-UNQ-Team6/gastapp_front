@@ -95,6 +95,8 @@ const AuthStackScreen = () => (
 
 export default () => {
 
+    console.disableYellowBox = true;
+
     const [isLoading, setIsLogin] = React.useState(true);
     const [user, setUser] = React.useState(null);
 

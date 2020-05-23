@@ -73,7 +73,7 @@ class AddExpenseScreen extends Component {
                 
                 <TextWithIconComponent iconName="exp-amount" iconSize={50} keyboardType='numeric' placeholder="Monto" onChange={this.chageAmount.bind(this)} />
 
-                <CategoryPickerComponent onChange={this.changeCategory.bind(this)} categories={this.state.categories}/>
+                <CategoryPickerComponent onChange={this.changeCategory.bind(this)} categories={this.state.categories} category={() => {return this.state.category}}/>
 
                 <TextWithIconComponent iconName="exp-description" iconSize={50} keyboardType='default' placeholder="Descripcion" onChange={this.chageDescription.bind(this)} />
 

@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignSelf: 'center',
-        marginBottom: 5
+        marginBottom: 5,
     },
     button: {
         marginHorizontal: 20,

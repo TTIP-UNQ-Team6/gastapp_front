@@ -8,7 +8,7 @@ const CategoryPickerComponent = (props) => {
             <View style={styles.iconView}>{getIcon("exp-date", 50)}</View>
             <View style={styles.pickerView}>
                 <Picker
-                    selectedValue={props.category}
+                    selectedValue={props.category()}
                     onValueChange={(category) => props.onChange(category)}
                 >
                 {props.categories.map(
