@@ -35,11 +35,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginTop: 10,
         borderRadius: 10,
-        elevation: 1
-    },
-    container: {
-        margin: 5,
-        alignItems: 'center',
+        elevation: 2,
+        marginBottom: 5
     },
     titleView: {
         borderBottomWidth: 0.3,
@@ -62,8 +59,6 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         fontSize: 15
-    },
-    listView: {
     },
     itemTitle: {
         fontSize: 10,

@@ -16,6 +16,8 @@ export default class MainScreen extends Component {
             navigation: props.navigation,
             lastestExpenses: [],
             lastestIncomes: [],
+            incomeAmount: 0,
+            expenseAmount: 0
         }
     }
 
@@ -27,14 +29,19 @@ export default class MainScreen extends Component {
         getLastestIncomes(this.state.user.email).then(res => this.setState({lastestIncomes: res}));
     }
 
+    loadAmounts() {
+        getTotalExpensesAmount(this.state.user.email).then(res => this.setState({expenseAmount: res.total}))
+        getTotalIncomesAmount(this.state.user.email).then(res => this.setState({incomeAmount: res.total}))
+    }
+
     componentDidMount(){
-        this.loadLastestExpenses();
-        this.loadLastestIncomes();
+        this.updateScreen();
     }
 
     updateScreen() {
         this.loadLastestExpenses();
         this.loadLastestIncomes();
+        this.loadAmounts();
     }
 
     render() {
@@ -42,7 +49,7 @@ export default class MainScreen extends Component {
             <View style={styles.view}>
                 <HeaderComponent/>
                 <ScrollView> 
-                    <BalanceComponent incomeAmount={4000} expenseAmount={2000}/>
+                    <BalanceComponent incomeAmount={this.state.incomeAmount} expenseAmount={this.state.expenseAmount}/>
                     <ShortListComponent title="Ultimos gastos" navigation={this.state.navigation} items={this.state.lastestExpenses} viewAllScreen={"ExpensesScreen"} getAll={getAllExpenses} getTotal={getTotalExpensesAmount} user_email={this.state.user.email}/>
                     <ShortListComponent title="Ultimos ingresos" navigation={this.state.navigation} items={this.state.lastestIncomes} viewAllScreen={"IncomesScreen"} getAll={getAllIncomes} getTotal={getTotalIncomesAmount} user_email={this.state.user.email}/>
                 </ScrollView>

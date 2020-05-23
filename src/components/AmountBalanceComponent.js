@@ -7,7 +7,7 @@ const AmountBalanceComponent = (props) => {
         <View style={styles.view}>
             <View style={styles.iconView}>
                 <View style={styles.icon}>
-                    {getIcon(props.icon, props.iconSize)}
+                    {getIcon(props.icon, props.iconSize, props.iconColor)}
                 </View>
             </View>
             <View style={styles.textView}>
