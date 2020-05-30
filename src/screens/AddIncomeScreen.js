@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { getIncomeCategories, addIncome } from '../gastappService';
-import TextWithIconComponent from '../components/TextWithIconComponent';
-import CancelAcceptComponent from '../components/CancelAcceptComponent';
-import DatePickerComponent from '../components/DatePickerComponent';
-import CategoryPickerComponent from '../components/CategoryPickerComponent';
+import IncomeComponent from '../components/IncomeComponent';
 
 class AddIncomeScreen extends Component {
 
@@ -69,19 +66,13 @@ class AddIncomeScreen extends Component {
 
     render() {
         return (
-            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.view}>
-                
-                <TextWithIconComponent iconName="exp-amount" iconSize={50} keyboardType='numeric' placeholder="Monto" onChange={this.chageAmount.bind(this)} />
-
-                <CategoryPickerComponent onChange={this.changeCategory.bind(this)} categories={this.state.categories} category={() => {return this.state.category}}/>
-
-                <TextWithIconComponent iconName="exp-description" iconSize={50} keyboardType='default' placeholder="Descripcion" onChange={this.chageDescription.bind(this)} />
-
-                <DatePickerComponent onChange={this.changeDate.bind(this)} initialDate={this.state.date}/>
-
-                <CancelAcceptComponent onAccept={this.submitIncome.bind(this)} onCancel={this.cancelIncome.bind(this)} />
-
-            </KeyboardAvoidingView>
+            <IncomeComponent 
+                onAmountChange={this.chageAmount.bind(this)}
+                onCategoryChange={this.changeCategory.bind(this)} categories={this.state.categories} category={this.state.category}
+                onDescriptionChange={this.chageDescription.bind(this)}
+                onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
+                onAccept={this.submitIncome.bind(this)} onCancel={this.cancelIncome.bind(this)}
+            />
         );
     }
 }

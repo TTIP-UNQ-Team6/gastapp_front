@@ -5,9 +5,9 @@ import { getIcon } from '../icons'
 
 const ItemList = (props) => {
     const date = new Date(props.item.date.$date)
-    
+
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate(props.editScreen, {item: props.item, onSubmit: props.onSubmit})}>
                 <View>
                     <ListItem
                         leftIcon={props.icon ? getIcon(props.item.category) : undefined}

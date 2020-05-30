@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, FlatList, View, Text, Picker } from 'react-native';
+import { StyleSheet, FlatList, View, Text } from 'react-native';
 import ItemList from '../components/ItemList';
 
 class HistoryScreen extends Component {
@@ -8,24 +8,29 @@ class HistoryScreen extends Component {
     super(props);
     this.state = {
       user_email: props.route.params.user_email,
-      expenses: [],
+      all: [],
       totalAmount: 0,
     }
   }
 
-  loadAllExpenses() {
+  loadAll() {
     this.props.route.params.getAll(this.state.user_email)
-    .then(res => this.setState({expenses: res}))
-    .catch(e => this.setState({expenses: []}));
+    .then(res => this.setState({all: res}))
+    .catch(e => this.setState({all: []}));
   }
 
   loadTotalAmount() {
     this.props.route.params.getTotal(this.state.user_email).then(res => {this.setState({totalAmount: res[0]["total"]})}).catch(e => this.setState({totalAmount: 0}));
   }
 
+  update() {
+    this.loadAll();
+    this.props.route.params.update();
+  }
+
   componentDidMount() {
+    this.loadAll();
     this.loadTotalAmount();
-    this.loadAllExpenses();
   }
 
   render = () => {
@@ -38,8 +43,8 @@ class HistoryScreen extends Component {
 
           <FlatList 
             style={styles.list}
-            data={this.state.expenses} 
-            renderItem={({item}) => <ItemList item={item} icon={true}></ItemList>}
+            data={this.state.all} 
+            renderItem={({item}) => <ItemList onSubmit={this.update.bind(this)} navigation={this.props.navigation} editScreen={this.props.route.params.editScreen} item={item} icon={true}></ItemList>}
             keyExtractor={(item) => item._id.$oid}
           />
         </View>

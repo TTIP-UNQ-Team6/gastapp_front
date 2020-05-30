@@ -6,6 +6,7 @@ import HistoryScreen from './src/screens/HistoryScreen';
 import MainScreen from './src/screens/MainScreen';
 import AddExpenseScreen from './src/screens/AddExpenseScreen';
 import AddIncomeScreen from './src/screens/AddIncomeScreen';
+import EditExpenseScreen from './src/screens/EditExpenseScreen';
 import { LoginScreen } from './src/screens/LoginScreen';
 import { RegisterScreen } from './src/screens/RegisterScreen';
 import { AuthContext } from './src/context/AuthContext';
@@ -71,6 +72,26 @@ const HomeStackScreen = (user) => (
                 }
             }
         />
+        <HomeStack.Screen
+            name="EditExpenseScreen"
+            component={EditExpenseScreen}
+            options={
+                {
+                    title: "Editar gasto",
+                    headerTitleAlign: 'center'
+                }
+            }
+        />
+        <HomeStack.Screen
+            name="EditIncomeScreen"
+            component={EditExpenseScreen}
+            options={
+                {
+                    title: "Editar ingreso",
+                    headerTitleAlign: 'center'
+                }
+            }
+        />
     </HomeStack.Navigator>
 )
 
@@ -98,7 +119,7 @@ export default () => {
     console.disableYellowBox = true;
 
     const [isLoading, setIsLogin] = React.useState(true);
-    const [user, setUser] = React.useState(null);
+    const [user, setUser] = React.useState("Mauro@mauro.com");
 
     React.useEffect(() => {
         setTimeout(() => {

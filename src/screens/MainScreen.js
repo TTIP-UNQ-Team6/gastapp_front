@@ -50,8 +50,8 @@ export default class MainScreen extends Component {
                 <HeaderComponent/>
                 <ScrollView> 
                     <BalanceComponent incomeAmount={this.state.incomeAmount} expenseAmount={this.state.expenseAmount}/>
-                    <ShortListComponent title="Ultimos gastos" navigation={this.state.navigation} items={this.state.lastestExpenses} viewAllScreen={"ExpensesScreen"} getAll={getAllExpenses} getTotal={getTotalExpensesAmount} user_email={this.state.user.email}/>
-                    <ShortListComponent title="Ultimos ingresos" navigation={this.state.navigation} items={this.state.lastestIncomes} viewAllScreen={"IncomesScreen"} getAll={getAllIncomes} getTotal={getTotalIncomesAmount} user_email={this.state.user.email}/>
+                    <ShortListComponent title="Ultimos gastos" update={this.updateScreen.bind(this)} navigation={this.state.navigation} editScreen={"EditExpenseScreen"} items={this.state.lastestExpenses} viewAllScreen={"ExpensesScreen"} getAll={getAllExpenses} getTotal={getTotalExpensesAmount} user_email={this.state.user.email}/>
+                    <ShortListComponent title="Ultimos ingresos" navigation={this.state.navigation} editScreen={""} items={this.state.lastestIncomes} viewAllScreen={"IncomesScreen"} getAll={getAllIncomes} getTotal={getTotalIncomesAmount} user_email={this.state.user.email}/>
                 </ScrollView>
                 <FooterComponent navigation={this.state.navigation} user_email={this.state.user.email} updateScreen={this.updateScreen.bind(this)}/>
             </View>

@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { getExpenseCategories, addExpense } from '../gastappService';
-import TextWithIconComponent from '../components/TextWithIconComponent';
-import CancelAcceptComponent from '../components/CancelAcceptComponent';
-import DatePickerComponent from '../components/DatePickerComponent';
-import CategoryPickerComponent from '../components/CategoryPickerComponent';
+import ExpenseComponent from '../components/ExpenseComponent';
 
 class AddExpenseScreen extends Component {
 
@@ -48,7 +44,7 @@ class AddExpenseScreen extends Component {
         this.setState({category: category});
     }
 
-    submitExpense() {
+    buildExpense() {
         const expense = {
             "user_email": this.state.user_email,
             "amount": this.state.amount,
@@ -57,6 +53,11 @@ class AddExpenseScreen extends Component {
             "date": this.state.date.toISOString()
         }
 
+        return expense;
+    }
+
+    submitExpense() {
+        expense = this.buildExpense();
         addExpense(expense).then(res => {
             this.props.route.params.updateScreen()
             this.state.navigation.goBack();
@@ -69,68 +70,15 @@ class AddExpenseScreen extends Component {
 
     render() {
         return (
-            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.view}>
-                
-                <TextWithIconComponent iconName="exp-amount" iconSize={50} keyboardType='numeric' placeholder="Monto" onChange={this.chageAmount.bind(this)} />
-
-                <CategoryPickerComponent onChange={this.changeCategory.bind(this)} categories={this.state.categories} category={() => {return this.state.category}}/>
-
-                <TextWithIconComponent iconName="exp-description" iconSize={50} keyboardType='default' placeholder="Descripcion" onChange={this.chageDescription.bind(this)} />
-
-                <DatePickerComponent onChange={this.changeDate.bind(this)} initialDate={this.state.date}/>
-
-                <CancelAcceptComponent onAccept={this.submitExpense.bind(this)} onCancel={this.cancelExpense.bind(this)} />
-
-            </KeyboardAvoidingView>
+            <ExpenseComponent 
+                onAmountChange={this.chageAmount.bind(this)} initialAmount={this.state.amount}
+                onCategoryChange={this.changeCategory.bind(this)} categories={this.state.categories} category={this.state.category}
+                onDescriptionChange={this.chageDescription.bind(this)} initialDescription={this.state.description}
+                onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
+                onAccept={this.submitExpense.bind(this)} onCancel={this.cancelExpense.bind(this)}
+            />
         );
     }
 }
-
-const styles = StyleSheet.create({
-    inputBox: {
-        flexDirection: 'row',
-        width: '80%',
-        backgroundColor: 'white',
-        borderRadius: 4,
-        marginTop: 20,
-        borderColor: '#c4c6c8',
-        borderBottomWidth: 1,
-        alignSelf: 'center',
-    },
-    view: {
-        backgroundColor: '#fff',
-        elevation: 1,
-        margin: 10,
-        borderRadius: 10,
-        flex: 1,
-    },
-    textInputs: {
-        height: 65,
-        backgroundColor: 'white',
-        borderRadius: 4,
-        color: 'black',
-        fontSize: 17,
-        flex: 8
-    },
-    iconView: {
-        alignSelf: 'center',
-        marginHorizontal: 5,
-        flex: 2
-    },
-    pickerView: {
-        backgroundColor: "white",
-        flex: 8
-    },
-    buttonDate: {
-        flex: 8,
-        backgroundColor: "#0000",
-    },
-    textButtonDate: {
-        color: 'black',
-        fontSize: 17,
-        textAlignVertical: 'center',
-        paddingVertical: 14
-    },
-})
 
 export default AddExpenseScreen;
