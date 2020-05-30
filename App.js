@@ -7,6 +7,7 @@ import MainScreen from './src/screens/MainScreen';
 import AddExpenseScreen from './src/screens/AddExpenseScreen';
 import AddIncomeScreen from './src/screens/AddIncomeScreen';
 import EditExpenseScreen from './src/screens/EditExpenseScreen';
+import EditIncomeScreen from './src/screens/EditIncomeScreen';
 import { LoginScreen } from './src/screens/LoginScreen';
 import { RegisterScreen } from './src/screens/RegisterScreen';
 import { AuthContext } from './src/context/AuthContext';
@@ -84,7 +85,7 @@ const HomeStackScreen = (user) => (
         />
         <HomeStack.Screen
             name="EditIncomeScreen"
-            component={EditExpenseScreen}
+            component={EditIncomeScreen}
             options={
                 {
                     title: "Editar ingreso",

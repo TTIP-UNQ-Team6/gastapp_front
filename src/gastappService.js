@@ -35,6 +35,7 @@ export const getIncomeCategories = body => { return get('/category/income/get_al
 export const getLastestIncomes = user_email => { return get('/income/get_latest', {"user_email": user_email}) };
 export const getTotalIncomesAmount = user_email => { return get('/income/get_total_by/user', {"user_email": user_email}) };
 export const addIncome = body => { return post('/income/add', {"body": body}) };
+export const editIncome = body => { return post('/income/edit_expense', {"body": body}) }
 
 export const loginUser = (email, password) => { return post('/login', {"email": email, "password": password}) };
 export const registerUser = (username, email, password) => { return post('/register', {"name": username, "email": email, "password": password}) };

@@ -9,11 +9,11 @@ const IncomeComponent = (props) => {
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.view}>
 
-            <TextWithIconComponent iconName="exp-amount" iconSize={50} keyboardType='numeric' placeholder="Monto" onChange={props.onAmountChange} />
+            <TextWithIconComponent iconName="exp-amount" iconSize={50} keyboardType='numeric' placeholder="Monto" initialValue={props.initialAmount + ""} onChange={props.onAmountChange} />
 
             <CategoryPickerComponent onChange={props.onCategoryChange} categories={props.categories} category={() => props.category} />
 
-            <TextWithIconComponent iconName="exp-description" iconSize={50} keyboardType='default' placeholder="Descripcion" onChange={props.onDescriptionChange} />
+            <TextWithIconComponent iconName="exp-description" iconSize={50} keyboardType='default' placeholder="Descripcion" initialValue={props.initialDescription + ""} onChange={props.onDescriptionChange} />
 
             <DatePickerComponent onChange={props.onDateChange} initialDate={props.initialDate} />
 
