@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
 import { getIncomeCategories, addIncome } from '../gastappService';
 import IncomeComponent from '../components/IncomeComponent';
 
@@ -67,52 +66,14 @@ class AddIncomeScreen extends Component {
     render() {
         return (
             <IncomeComponent 
-                onAmountChange={this.chageAmount.bind(this)}
+                onAmountChange={this.chageAmount.bind(this)} initialAmount={this.state.amount}
                 onCategoryChange={this.changeCategory.bind(this)} categories={this.state.categories} category={this.state.category}
-                onDescriptionChange={this.chageDescription.bind(this)}
+                onDescriptionChange={this.chageDescription.bind(this)} initialDescription={this.state.description}
                 onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
                 onAccept={this.submitIncome.bind(this)} onCancel={this.cancelIncome.bind(this)}
             />
         );
     }
 }
-
-const styles = StyleSheet.create({
-    inputBox: {
-        flexDirection: 'row',
-        width: '80%',
-        backgroundColor: 'white',
-        borderRadius: 4,
-        marginTop: 20,
-        borderColor: '#c4c6c8',
-        borderBottomWidth: 1,
-        alignSelf: 'center',
-    },
-    view: {
-        backgroundColor: '#fff',
-        elevation: 1,
-        margin: 10,
-        borderRadius: 10,
-        flex: 1,
-    },
-    textInputs: {
-        height: 65,
-        backgroundColor: 'white',
-        borderRadius: 4,
-        color: 'black',
-        fontSize: 17,
-        flex: 8
-    },
-    iconView: {
-        alignSelf: 'center',
-        marginHorizontal: 5,
-        flex: 2
-    },
-    pickerView: {
-        backgroundColor: "white",
-        flex: 8
-    },
-
-})
 
 export default AddIncomeScreen;

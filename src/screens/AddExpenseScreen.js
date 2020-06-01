@@ -33,11 +33,11 @@ class AddExpenseScreen extends Component {
     }
 
     chageAmount(amount) {
-        this.setState({amount: amount})
+        this.setState({amount: amount});
     }
 
     chageDescription(description) {
-        this.setState({description: description})
+        this.setState({description: description});
     }
 
     changeCategory(category) {

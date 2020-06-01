@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { getIncomeCategories, editIncome } from '../gastappService';
+import { getIncomeCategories, editIncome, deleteIncome } from '../gastappService';
 import IncomeComponent from '../components/IncomeComponent';
+import DeleteIconComponent from '../components/DeleteIconComponent';
 import { View } from 'native-base';
 
 class EditIncomeScreen extends Component {
@@ -26,7 +27,17 @@ class EditIncomeScreen extends Component {
       }
 
     componentDidMount(){
+        this.state.navigation.setOptions({
+            headerRight: () => 
+              <DeleteIconComponent onPress={this.deleteIncome.bind(this)}/>
+          });
+
         this.loadCategories();
+    }
+
+    deleteIncome() {
+        const body = {"id": this.state.id}
+        deleteIncome(body).then(res => this.goBack())
     }
 
     changeDate(event) {
@@ -60,12 +71,16 @@ class EditIncomeScreen extends Component {
         return income;
     }
 
+    goBack() {
+        this.state.onSubmit();
+        this.state.navigation.goBack();
+    }
+
     submitEditIncome() {
         const income = this.buildIncome();
         editIncome(income).then(res => {
-            this.state.onSubmit();
+            this.goBack();
         })
-        .then(this.state.navigation.goBack());
     }
 
     cancelIncome() {

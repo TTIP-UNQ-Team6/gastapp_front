@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { getExpenseCategories, editExpense } from '../gastappService';
+import { StyleSheet, Button } from 'react-native';
+import { getExpenseCategories, editExpense, deleteExpense } from '../gastappService';
 import ExpenseComponent from '../components/ExpenseComponent';
+import DeleteIconComponent from '../components/DeleteIconComponent';
 import { View } from 'native-base';
 
 class EditExpenseScreen extends Component {
@@ -20,13 +21,22 @@ class EditExpenseScreen extends Component {
         }
     }
 
-
     loadCategories() {
         getExpenseCategories().then(res => this.setState({categories: res})).catch(e => this.setState({categories: []}));
       }
 
-    componentDidMount(){
+    componentDidMount() {
+          this.state.navigation.setOptions({
+            headerRight: () => 
+              <DeleteIconComponent onPress={this.deleteExpense.bind(this)}/>
+          });
+
         this.loadCategories();
+    }
+
+    deleteExpense() {
+        const body = {"id": this.state.id}
+        deleteExpense(body).then(res => this.goBack())
     }
 
     changeDate(event) {
@@ -60,12 +70,16 @@ class EditExpenseScreen extends Component {
         return expense;
     }
 
+    goBack() {
+        this.state.onSubmit();
+        this.state.navigation.goBack();
+    }
+
     submitEditExpense() {
         const expense = this.buildExpense();
         editExpense(expense).then(res => {
-            this.state.onSubmit();
+            this.goBack();
         })
-        .then(this.state.navigation.goBack());
     }
 
     cancelExpense() {

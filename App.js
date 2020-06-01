@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoadingScreen from './src/screens/LoadingScreen';
@@ -79,7 +79,7 @@ const HomeStackScreen = (user) => (
             options={
                 {
                     title: "Editar gasto",
-                    headerTitleAlign: 'center'
+                    headerTitleAlign: 'center',
                 }
             }
         />
