@@ -29,6 +29,7 @@ export const getExpenseCategories = body => { return get('/category/expense/get_
 export const getTotalExpensesAmount = user_email => { return get('/expense/get_total_by/user', {"user_email": user_email}) };
 export const getTotalCategoryAmount = (user_email, category) => { return get('/expense/get_total_by/category', {"user_email": user_email, "category": category}) };
 export const getLastestExpenses = user_email => { return get('/expense/get_latest', {"user_email": user_email}) };
+export const getExpenseAccounts = body => { return get('/account/expense/get_all') };
 export const addExpense = body => { return post('/expense/add', {"body": body}) }
 export const editExpense = body => { return post('/expense/edit_expense', {"body": body}) }
 export const deleteExpense = body => { return post('/expense/delete', {"body": body}) }
@@ -37,6 +38,7 @@ export const getAllIncomes = user_email => { return get('/income/get_all', {"use
 export const getIncomeCategories = body => { return get('/category/income/get_all') };
 export const getLastestIncomes = user_email => { return get('/income/get_latest', {"user_email": user_email}) };
 export const getTotalIncomesAmount = user_email => { return get('/income/get_total_by/user', {"user_email": user_email}) };
+export const getIncomeAccounts = body => { return get('/account/income/get_all') };
 export const addIncome = body => { return post('/income/add', {"body": body}) };
 export const editIncome = body => { return post('/income/edit_expense', {"body": body}) }
 export const deleteIncome = body => { return post('/income/delete', {"body": body}) }

@@ -6,7 +6,7 @@ const CustomButtom = (props) => {
 
     return(
         <View style={styles.view}>
-            <TouchableOpacity style={styles.button} onPress={() => props.onPress()}> 
+            <TouchableOpacity style={props.buttonStyle || styles.button} onPress={() => props.onPress()}> 
                 <Text style={styles.buttonText}>
                     {props.text}
                 </Text> 

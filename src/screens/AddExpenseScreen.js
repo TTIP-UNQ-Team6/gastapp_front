@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getExpenseCategories, addExpense } from '../gastappService';
+import { getExpenseCategories, addExpense, getExpenseAccounts } from '../gastappService';
 import ExpenseComponent from '../components/ExpenseComponent';
 
 class AddExpenseScreen extends Component {
@@ -12,6 +12,8 @@ class AddExpenseScreen extends Component {
             categories: [],
             category: '',
             amount: 0,
+            accounts: [],
+            account: '',
             date: new Date(Date.now()),
             description: "",
         }
@@ -20,10 +22,15 @@ class AddExpenseScreen extends Component {
 
     loadCategories() {
         getExpenseCategories().then(res => this.setState({categories: res})).catch(e => this.setState({categories: []}));
-      }
+    }
+
+    loadAccounts() {
+        getExpenseAccounts().then(res => this.setState({accounts: res})).catch(e => this.setState({accounts: []}))
+    }
 
     componentDidMount(){
         this.loadCategories();
+        this.loadAccounts();
     }
 
     changeDate(event) {
@@ -44,12 +51,17 @@ class AddExpenseScreen extends Component {
         this.setState({category: category});
     }
 
+    changeAccount(account) {
+        this.setState({account: account});
+    }
+
     buildExpense() {
         const expense = {
             "user_email": this.state.user_email,
             "amount": this.state.amount,
             "category": this.state.category,
             "description": this.state.description,
+            "account": this.state.account,
             "date": this.state.date.toISOString()
         }
 
@@ -75,6 +87,7 @@ class AddExpenseScreen extends Component {
                 onCategoryChange={this.changeCategory.bind(this)} categories={this.state.categories} category={this.state.category}
                 onDescriptionChange={this.chageDescription.bind(this)} initialDescription={this.state.description}
                 onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
+                onAccountChange={this.changeAccount.bind(this)} accounts={this.state.accounts} account={this.state.account}
                 onAccept={this.submitExpense.bind(this)} onCancel={this.cancelExpense.bind(this)}
             />
         );

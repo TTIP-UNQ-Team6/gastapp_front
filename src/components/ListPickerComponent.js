@@ -2,10 +2,10 @@ import React from 'react';
 import { View, StyleSheet, Picker} from 'react-native';
 import { getIcon } from '../icons';
 
-const CategoryPickerComponent = (props) => {
+const ListPickerComponent = (props) => {
     return (
         <View style={styles.inputBox}>
-            <View style={styles.iconView}>{getIcon("exp-date", 50)}</View>
+            <View style={styles.iconView}>{getIcon(props.iconName, 50)}</View>
             <View style={styles.pickerView}>
                 <Picker
                     selectedValue={props.category()}
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default CategoryPickerComponent;
+export default ListPickerComponent;

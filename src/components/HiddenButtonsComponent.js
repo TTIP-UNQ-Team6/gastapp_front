@@ -21,6 +21,7 @@ const HiddenButtonsComponent = (props) => {
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: '#fff',
         flexDirection: 'row',
         alignSelf: 'center',
         marginBottom: 5,
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         backgroundColor: '#1E90FF',
         borderRadius: 10,
-        width: 120,
+        width: 130,
         height: 30,
         alignSelf: 'center',
         elevation: 5

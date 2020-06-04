@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#1E90FF',
         borderRadius: 10,
         width: '40%',
-        height: '30%'
+        height: '40%',
+        justifyContent: 'center'
     },
     bottomButtonsText: {
         color: 'white',
         fontSize: 19,
-        textAlign: 'center',
-        padding: '11%'
+        textAlign: 'center'
     }
 });
 

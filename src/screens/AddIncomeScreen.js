@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getIncomeCategories, addIncome } from '../gastappService';
+import { getIncomeCategories, addIncome, getIncomeAccounts } from '../gastappService';
 import IncomeComponent from '../components/IncomeComponent';
 
 class AddIncomeScreen extends Component {
@@ -11,6 +11,8 @@ class AddIncomeScreen extends Component {
             user_email: props.route.params.user_email,
             categories: [],
             category: '',
+            accounts: [],
+            account: '',
             amount: 0,
             date: new Date(Date.now()),
             description: "",
@@ -20,10 +22,15 @@ class AddIncomeScreen extends Component {
 
     loadCategories() {
         getIncomeCategories().then(res => this.setState({categories: res})).catch(e => this.setState({categories: []}));
-      }
+    }
+
+    loadAccounts() {
+        getIncomeAccounts().then(res => this.setState({accounts: res})).catch(e => this.setState({accounts: []}));
+    }
 
     componentDidMount(){
         this.loadCategories();
+        this.loadAccounts();
     }
 
     changeDate(event) {
@@ -44,12 +51,17 @@ class AddIncomeScreen extends Component {
         this.setState({category: category});
     }
 
+    changeAccount(account) {
+        this.setState({account: account});
+    }
+
     submitIncome() {
         const income = {
             "user_email": this.state.user_email,
             "amount": this.state.amount,
             "category": this.state.category,
             "description": this.state.description,
+            "account": this.state.account,
             "date": this.state.date.toISOString()
         }
 
@@ -70,6 +82,7 @@ class AddIncomeScreen extends Component {
                 onCategoryChange={this.changeCategory.bind(this)} categories={this.state.categories} category={this.state.category}
                 onDescriptionChange={this.chageDescription.bind(this)} initialDescription={this.state.description}
                 onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
+                onAccountChange={this.changeAccount.bind(this)} accounts={this.state.accounts} account={this.state.account}
                 onAccept={this.submitIncome.bind(this)} onCancel={this.cancelIncome.bind(this)}
             />
         );

@@ -47,7 +47,7 @@ export default class MainScreen extends Component {
     render() {
         return (
             <View style={styles.view}>
-                <HeaderComponent/>
+                <HeaderComponent navigation={this.state.navigation} user={this.state.user}/>
                 <ScrollView> 
                     <BalanceComponent incomeAmount={this.state.incomeAmount} expenseAmount={this.state.expenseAmount}/>
                     <ShortListComponent title="Ultimos gastos" update={this.updateScreen.bind(this)} navigation={this.state.navigation} editScreen={"EditExpenseScreen"} items={this.state.lastestExpenses} viewAllScreen={"ExpensesScreen"} getAll={getAllExpenses} getTotal={getTotalExpensesAmount} user_email={this.state.user.email}/>

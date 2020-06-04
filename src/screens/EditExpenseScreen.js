@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button } from 'react-native';
-import { getExpenseCategories, editExpense, deleteExpense } from '../gastappService';
+import { getExpenseCategories, editExpense, deleteExpense, getExpenseAccounts } from '../gastappService';
 import ExpenseComponent from '../components/ExpenseComponent';
 import DeleteIconComponent from '../components/DeleteIconComponent';
 import { View } from 'native-base';
@@ -13,6 +13,8 @@ class EditExpenseScreen extends Component {
             onSubmit: props.route.params.onSubmit,
             user_email: props.route.params.item.user_email,
             categories: [],
+            accounts: [],
+            account: '',
             id: props.route.params.item._id.$oid,
             category: props.route.params.item.category,
             amount: props.route.params.item.amount,
@@ -23,7 +25,11 @@ class EditExpenseScreen extends Component {
 
     loadCategories() {
         getExpenseCategories().then(res => this.setState({categories: res})).catch(e => this.setState({categories: []}));
-      }
+    }
+
+    loadAccounts() {
+        getExpenseAccounts().then(res => this.setState({accounts: res})).catch(e => this.setState({accounts: []}))
+    }
 
     componentDidMount() {
           this.state.navigation.setOptions({
@@ -31,6 +37,7 @@ class EditExpenseScreen extends Component {
               <DeleteIconComponent onPress={this.deleteExpense.bind(this)}/>
           });
 
+        this.loadAccounts();
         this.loadCategories();
     }
 
@@ -57,6 +64,10 @@ class EditExpenseScreen extends Component {
         this.setState({category: category});
     }
 
+    changeAccount(account) {
+        this.setState({account: account});
+    }
+
     buildExpense() {
         const expense = {
             "id": this.state.id,
@@ -64,6 +75,7 @@ class EditExpenseScreen extends Component {
             "amount": this.state.amount,
             "category": this.state.category,
             "description": this.state.description,
+            "account": this.state.account,
             "date": this.state.date.toISOString()
         }
 
@@ -94,6 +106,7 @@ class EditExpenseScreen extends Component {
                     onCategoryChange={this.changeCategory.bind(this)} categories={this.state.categories} category={this.state.category}
                     onDescriptionChange={this.chageDescription.bind(this)} initialDescription={this.state.description}
                     onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
+                    onAccountChange={this.changeAccount.bind(this)} accounts={this.state.accounts} account={this.state.account}
                     onAccept={this.submitEditExpense.bind(this)} onCancel={this.cancelExpense.bind(this)}
                 />
             </View>

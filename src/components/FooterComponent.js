@@ -17,7 +17,7 @@ const FooterComponent = (props) => {
             <View style={styles.footer}>
                 <View style={styles.plusIcon}>
                     <TouchableOpacity onPress={() => { setShow(!show) }}>
-                        {getIcon("plus", 53)}
+                        {getIcon("plus", 50)}
                     </TouchableOpacity>
                 </View>
             </View>
@@ -29,11 +29,12 @@ const FooterComponent = (props) => {
 const styles = StyleSheet.create({
     footer: {
         flexDirection: 'column',
-        height: 55,
+        height: 42,
         backgroundColor: "#fff",
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        elevation: 50
+        elevation: 50,
+        justifyContent: 'center'
     },
     plusIcon: {
         alignSelf: 'center',

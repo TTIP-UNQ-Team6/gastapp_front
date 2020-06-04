@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { getIncomeCategories, editIncome, deleteIncome } from '../gastappService';
+import { getIncomeCategories, editIncome, deleteIncome, getIncomeAccounts } from '../gastappService';
 import IncomeComponent from '../components/IncomeComponent';
 import DeleteIconComponent from '../components/DeleteIconComponent';
 import { View } from 'native-base';
@@ -12,9 +12,11 @@ class EditIncomeScreen extends Component {
             navigation: props.navigation,
             onSubmit: props.route.params.onSubmit,
             user_email: props.route.params.item.user_email,
-            categories: [],
             id: props.route.params.item._id.$oid,
+            categories: [],
             category: props.route.params.item.category,
+            accounts: [],
+            account: '',
             amount: props.route.params.item.amount,
             date: new Date(props.route.params.item.date.$date),
             description: props.route.params.item.description,
@@ -24,7 +26,11 @@ class EditIncomeScreen extends Component {
 
     loadCategories() {
         getIncomeCategories().then(res => this.setState({categories: res})).catch(e => this.setState({categories: []}));
-      }
+    }
+
+    loadAccounts() {
+        getIncomeAccounts().then(res => this.setState({accounts: res})).catch(e => this.setState({accounts: []}));
+    }
 
     componentDidMount(){
         this.state.navigation.setOptions({
@@ -32,6 +38,7 @@ class EditIncomeScreen extends Component {
               <DeleteIconComponent onPress={this.deleteIncome.bind(this)}/>
           });
 
+        this.loadAccounts();
         this.loadCategories();
     }
 
@@ -58,6 +65,10 @@ class EditIncomeScreen extends Component {
         this.setState({category: category});
     }
 
+    changeAccount(account) {
+        this.setState({account: account});
+    }
+
     buildIncome() {
         const income = {
             "id": this.state.id,
@@ -65,6 +76,7 @@ class EditIncomeScreen extends Component {
             "amount": this.state.amount,
             "category": this.state.category,
             "description": this.state.description,
+            "account": this.state.account,
             "date": this.state.date.toISOString()
         }
 
@@ -94,6 +106,7 @@ class EditIncomeScreen extends Component {
                     onAmountChange={this.chageAmount.bind(this)} initialAmount={this.state.amount}
                     onCategoryChange={this.changeCategory.bind(this)} categories={this.state.categories} category={this.state.category}
                     onDescriptionChange={this.chageDescription.bind(this)} initialDescription={this.state.description}
+                    onAccountChange={this.changeAccount.bind(this)} accounts={this.state.accounts} account={this.state.account}     
                     onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
                     onAccept={this.submitEditIncome.bind(this)} onCancel={this.cancelIncome.bind(this)}
                 />
