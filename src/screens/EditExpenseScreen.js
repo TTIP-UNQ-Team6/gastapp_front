@@ -14,10 +14,10 @@ class EditExpenseScreen extends Component {
             user_email: props.route.params.item.user_email,
             categories: [],
             accounts: [],
-            account: '',
             id: props.route.params.item._id.$oid,
             category: props.route.params.item.category,
             amount: props.route.params.item.amount,
+            account: props.route.params.item.account,
             date: new Date(props.route.params.item.date.$date),
             description: props.route.params.item.description,
         }

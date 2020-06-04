@@ -8,10 +8,10 @@ const ListPickerComponent = (props) => {
             <View style={styles.iconView}>{getIcon(props.iconName, 50)}</View>
             <View style={styles.pickerView}>
                 <Picker
-                    selectedValue={props.category()}
-                    onValueChange={(category) => props.onChange(category)}
+                    selectedValue={props.value()}
+                    onValueChange={(value) => props.onChange(value)}
                 >
-                {props.categories.map(
+                {props.list.map(
                     (item, key) => (<Picker.Item label={item} value={item} key={key} />)
                 )}
                 </Picker>

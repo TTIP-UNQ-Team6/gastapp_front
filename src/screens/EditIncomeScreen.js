@@ -16,7 +16,7 @@ class EditIncomeScreen extends Component {
             categories: [],
             category: props.route.params.item.category,
             accounts: [],
-            account: '',
+            account: props.route.params.item.account,
             amount: props.route.params.item.amount,
             date: new Date(props.route.params.item.date.$date),
             description: props.route.params.item.description,
