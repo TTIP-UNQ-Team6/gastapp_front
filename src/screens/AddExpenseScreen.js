@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getExpenseCategories, addExpense, getExpenseAccounts } from '../gastappService';
+import { getExpenseCategories, addExpense, getExpenseAccounts, getExpenseTypes } from '../gastappService';
 import ExpenseComponent from '../components/ExpenseComponent';
 
 class AddExpenseScreen extends Component {
@@ -14,6 +14,8 @@ class AddExpenseScreen extends Component {
             amount: 0,
             accounts: [],
             account: '',
+            types: [],
+            type: '',
             date: new Date(Date.now()),
             description: "",
         }
@@ -28,9 +30,14 @@ class AddExpenseScreen extends Component {
         getExpenseAccounts().then(res => this.setState({accounts: res})).catch(e => this.setState({accounts: []}))
     }
 
+    loadTypes() {
+        getExpenseTypes().then(res => this.setState({types: res})).catch(e => this.setState({types: []}))
+    }
+
     componentDidMount(){
         this.loadCategories();
         this.loadAccounts();
+        this.loadTypes();
     }
 
     changeDate(event) {
@@ -55,6 +62,10 @@ class AddExpenseScreen extends Component {
         this.setState({account: account});
     }
 
+    changeType(type) {
+        this.setState({type: type})
+    }
+
     buildExpense() {
         const expense = {
             "user_email": this.state.user_email,
@@ -62,6 +73,7 @@ class AddExpenseScreen extends Component {
             "category": this.state.category,
             "description": this.state.description,
             "account": this.state.account,
+            "type": this.state.type,
             "date": this.state.date.toISOString()
         }
 
@@ -69,7 +81,7 @@ class AddExpenseScreen extends Component {
     }
 
     submitExpense() {
-        expense = this.buildExpense();
+        const expense = this.buildExpense();
         addExpense(expense).then(res => {
             this.props.route.params.updateScreen()
             this.state.navigation.goBack();
@@ -86,8 +98,9 @@ class AddExpenseScreen extends Component {
                 onAmountChange={this.chageAmount.bind(this)} initialAmount={this.state.amount}
                 onCategoryChange={this.changeCategory.bind(this)} categories={this.state.categories} category={this.state.category}
                 onDescriptionChange={this.chageDescription.bind(this)} initialDescription={this.state.description}
-                onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
                 onAccountChange={this.changeAccount.bind(this)} accounts={this.state.accounts} account={this.state.account}
+                onTypeChange={this.changeType.bind(this)} types={this.state.types} type={this.state.type}
+                onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
                 onAccept={this.submitExpense.bind(this)} onCancel={this.cancelExpense.bind(this)}
             />
         );

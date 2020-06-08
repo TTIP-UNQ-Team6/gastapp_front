@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import TextWithIconComponent from './TextWithIconComponent';
 import CancelAcceptComponent from './CancelAcceptComponent';
 import DatePickerComponent from './DatePickerComponent';
@@ -8,6 +8,9 @@ import ListPickerComponent from './ListPickerComponent';
 const ExpenseComponent = (props) => {
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.view}>
+            
+        <ScrollView style={styles.inisideView}>
+
 
             <TextWithIconComponent iconName="exp-amount" iconSize={50} keyboardType='numeric' placeholder="Monto" initialValue={props.initialAmount + ""} onChange={props.onAmountChange} />
 
@@ -17,9 +20,14 @@ const ExpenseComponent = (props) => {
 
             <ListPickerComponent iconName='exp-acc' onChange={props.onAccountChange} list={props.accounts} value={() => props.account} />
 
-            <DatePickerComponent onChange={props.onDateChange} initialDate={props.initialDate} />
+            <ListPickerComponent iconName='exp-acc' onChange={props.onTypeChange} list={props.types} value={() => props.type} />
+
+            {props.type === "unico" ? <DatePickerComponent onChange={props.onDateChange} initialDate={props.initialDate} /> : <View/>}
+
+            </ScrollView >
 
             <CancelAcceptComponent onAccept={props.onAccept} onCancel={props.onCancel} />
+
 
         </KeyboardAvoidingView>
     );
@@ -31,8 +39,12 @@ const styles = StyleSheet.create({
         elevation: 1,
         margin: 10,
         borderRadius: 10,
-        flex: 1
-    }
+        flex: 1,
+        flexGrow: 1
+    },
+    inisideView: {
+        height: '50%'
+    },
 })
 
 export default ExpenseComponent;

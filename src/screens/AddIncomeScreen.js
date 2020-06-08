@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getIncomeCategories, addIncome, getIncomeAccounts } from '../gastappService';
+import { getIncomeCategories, addIncome, getIncomeAccounts, getIncomeTypes } from '../gastappService';
 import IncomeComponent from '../components/IncomeComponent';
 
 class AddIncomeScreen extends Component {
@@ -12,6 +12,8 @@ class AddIncomeScreen extends Component {
             categories: [],
             category: '',
             accounts: [],
+            types: [],
+            type: '',
             account: '',
             amount: 0,
             date: new Date(Date.now()),
@@ -28,9 +30,14 @@ class AddIncomeScreen extends Component {
         getIncomeAccounts().then(res => this.setState({accounts: res})).catch(e => this.setState({accounts: []}));
     }
 
+    loadTypes() {
+        getIncomeTypes().then(res => this.setState({types: res})).catch(e => this.setState({types: []}))
+    }
+
     componentDidMount(){
         this.loadCategories();
         this.loadAccounts();
+        this.loadTypes();
     }
 
     changeDate(event) {
@@ -55,6 +62,10 @@ class AddIncomeScreen extends Component {
         this.setState({account: account});
     }
 
+    changeType(type) {
+        this.setState({type: type})
+    }
+
     submitIncome() {
         const income = {
             "user_email": this.state.user_email,
@@ -62,6 +73,7 @@ class AddIncomeScreen extends Component {
             "category": this.state.category,
             "description": this.state.description,
             "account": this.state.account,
+            "type": this.state.type,
             "date": this.state.date.toISOString()
         }
 
@@ -82,6 +94,7 @@ class AddIncomeScreen extends Component {
                 onCategoryChange={this.changeCategory.bind(this)} categories={this.state.categories} category={this.state.category}
                 onDescriptionChange={this.chageDescription.bind(this)} initialDescription={this.state.description}
                 onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
+                onTypeChange={this.changeType.bind(this)} types={this.state.types} type={this.state.type}
                 onAccountChange={this.changeAccount.bind(this)} accounts={this.state.accounts} account={this.state.account}
                 onAccept={this.submitIncome.bind(this)} onCancel={this.cancelIncome.bind(this)}
             />

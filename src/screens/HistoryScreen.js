@@ -20,7 +20,7 @@ class HistoryScreen extends Component {
   }
 
   loadTotalAmount() {
-    this.props.route.params.getTotal(this.state.user_email).then(res => {this.setState({totalAmount: res[0]["total"]})}).catch(e => this.setState({totalAmount: 0}));
+    this.props.route.params.getTotal(this.state.user_email).then(res => {this.setState({totalAmount: res.total})}).catch(e => this.setState({totalAmount: 0}));
   }
 
   update() {

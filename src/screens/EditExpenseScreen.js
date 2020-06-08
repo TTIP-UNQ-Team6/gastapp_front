@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button } from 'react-native';
-import { getExpenseCategories, editExpense, deleteExpense, getExpenseAccounts } from '../gastappService';
+import { getExpenseCategories, editExpense, deleteExpense, getExpenseAccounts, getExpenseTypes } from '../gastappService';
 import ExpenseComponent from '../components/ExpenseComponent';
 import DeleteIconComponent from '../components/DeleteIconComponent';
 import { View } from 'native-base';
@@ -14,10 +14,12 @@ class EditExpenseScreen extends Component {
             user_email: props.route.params.item.user_email,
             categories: [],
             accounts: [],
+            types: [],
             id: props.route.params.item._id.$oid,
             category: props.route.params.item.category,
             amount: props.route.params.item.amount,
             account: props.route.params.item.account,
+            type: props.route.params.item.etype,
             date: new Date(props.route.params.item.date.$date),
             description: props.route.params.item.description,
         }
@@ -31,6 +33,10 @@ class EditExpenseScreen extends Component {
         getExpenseAccounts().then(res => this.setState({accounts: res})).catch(e => this.setState({accounts: []}))
     }
 
+    loadTypes() {
+        getExpenseTypes().then(res => this.setState({types: res})).catch(e => this.setState({types: []}))
+    }
+
     componentDidMount() {
           this.state.navigation.setOptions({
             headerRight: () => 
@@ -39,6 +45,7 @@ class EditExpenseScreen extends Component {
 
         this.loadAccounts();
         this.loadCategories();
+        this.loadTypes();
     }
 
     deleteExpense() {
@@ -68,6 +75,10 @@ class EditExpenseScreen extends Component {
         this.setState({account: account});
     }
 
+    changeType(type) {
+        this.setState({type: type})
+    }
+
     buildExpense() {
         const expense = {
             "id": this.state.id,
@@ -76,6 +87,7 @@ class EditExpenseScreen extends Component {
             "category": this.state.category,
             "description": this.state.description,
             "account": this.state.account,
+            "type": this.state.type,
             "date": this.state.date.toISOString()
         }
 
@@ -105,8 +117,9 @@ class EditExpenseScreen extends Component {
                     onAmountChange={this.chageAmount.bind(this)} initialAmount={this.state.amount}
                     onCategoryChange={this.changeCategory.bind(this)} categories={this.state.categories} category={this.state.category}
                     onDescriptionChange={this.chageDescription.bind(this)} initialDescription={this.state.description}
-                    onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
                     onAccountChange={this.changeAccount.bind(this)} accounts={this.state.accounts} account={this.state.account}
+                    onTypeChange={this.changeType.bind(this)} types={this.state.types} type={this.state.type}
+                    onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
                     onAccept={this.submitEditExpense.bind(this)} onCancel={this.cancelExpense.bind(this)}
                 />
             </View>
