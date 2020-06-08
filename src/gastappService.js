@@ -1,4 +1,4 @@
-const server = 'http://192.168.0.153:5000';
+const server = 'http://192.168.0.236:5000';
 
 const get = (path, body={}) => {
   var url = new URL(`${server}${path}`);
@@ -8,9 +8,6 @@ const get = (path, body={}) => {
 }
 
 const post = (path, body) => {
-
-  console.log("BODY: ", body)
-
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -32,6 +29,7 @@ export const getExpenseTypes = body => { return get('/expense/get_types') }
 export const addExpense = body => { return post('/expense/add', {"body": body}) }
 export const editExpense = body => { return post('/expense/edit_expense', {"body": body}) }
 export const deleteExpense = body => { return post('/expense/delete', {"body": body}) }
+export const filterExpenses = body => { return post('/expense/filter', {"body": body}) }
 
 export const getAllIncomes = user_email => { return get('/income/get_all', {"user_email": user_email}) };
 export const getIncomeCategories = body => { return get('/category/income/get_all') };
@@ -42,6 +40,7 @@ export const getIncomeTypes = body => { return get('/income/get_types') }
 export const addIncome = body => { return post('/income/add', {"body": body}) };
 export const editIncome = body => { return post('/income/edit_expense', {"body": body}) }
 export const deleteIncome = body => { return post('/income/delete', {"body": body}) }
+export const filterIncomes = body => { return post('/income/filter', {"body": body}) }
 
 export const loginUser = (email, password) => { return post('/login', {"email": email, "password": password}) };
 export const registerUser = (username, email, password) => { return post('/register', {"name": username, "email": email, "password": password}) };

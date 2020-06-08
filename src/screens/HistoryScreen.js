@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, FlatList, View, Text } from 'react-native';
+import { StyleSheet, FlatList, View, Text, Button } from 'react-native';
 import ItemList from '../components/ItemList';
+import FilterComponent from '../components/FilterComponent';
 
 class HistoryScreen extends Component {
 
@@ -8,8 +9,11 @@ class HistoryScreen extends Component {
     super(props);
     this.state = {
       user_email: props.route.params.user_email,
+      showFilter: false,
       all: [],
       totalAmount: 0,
+      categories: [],
+      accounts: []
     }
   }
 
@@ -23,14 +27,51 @@ class HistoryScreen extends Component {
     this.props.route.params.getTotal(this.state.user_email).then(res => {this.setState({totalAmount: res.total})}).catch(e => this.setState({totalAmount: 0}));
   }
 
+  loadCategories() {
+    this.props.route.params.getCategories()
+      .then(res => this.setState({categories: res}))
+      .catch(res => this.setState({categories: []}))
+  }
+
+  loadAccounts() {
+    this.props.route.params.getAccounts()
+      .then(res => this.setState({accounts: res}))
+      .catch(res => this.setState({accounts: []}))
+  }
+
+  filter(category_f, account_f, betweenDates, fromDate, toDate) {
+
+    const date = betweenDates ? {"from": fromDate, "to": toDate} : undefined
+    const category = category_f === "cualquiera" ? undefined : category_f
+    const account = account_f === "cualquiera" ? undefined : account_f
+
+    const body = {
+      "user_email": this.state.user_email,
+      "filter": {
+        "category": category,
+        "account": account,
+        "date": date
+      }
+    }
+    this.props.route.params.filter(body)
+      .then(res => this.setState({all: res.data}))
+      .catch(res => this.setState({all: []}))
+  }
+
   update() {
     this.loadAll();
     this.props.route.params.update();
   }
 
+  closeFilter() {
+    this.setState({showFilter: false})
+  }
+
   componentDidMount() {
     this.loadAll();
     this.loadTotalAmount();
+    this.loadAccounts();
+    this.loadCategories();
   }
 
   render = () => {
@@ -40,6 +81,16 @@ class HistoryScreen extends Component {
             <Text style={styles.totalText}>Total:</Text>
             <Text style={styles.totalPrice}>${this.state.totalAmount}</Text>
           </View>
+
+          <Button title="Filtrar" onPress={() => this.setState({showFilter: true})}/>
+
+          <FilterComponent 
+            isVisible={this.state.showFilter} 
+            close={this.closeFilter.bind(this)} 
+            onAccept={this.filter.bind(this)}
+            categories={this.state.categories}
+            accounts={this.state.accounts}
+/>
 
           <FlatList 
             style={styles.list}

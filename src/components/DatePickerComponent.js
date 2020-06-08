@@ -5,7 +5,6 @@ import { getIcon } from '../icons';
 
 const DatePickerComponent = (props) => {
     const [show, setShow] = React.useState(false);
-    const [date, setDate] = React.useState(new Date(Date.now));
     return (
         <View style={styles.inputBox}>
             <View style={styles.iconView}>{getIcon("exp-date", 50)}</View>
