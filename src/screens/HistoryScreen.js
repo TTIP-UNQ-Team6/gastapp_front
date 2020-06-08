@@ -13,7 +13,8 @@ class HistoryScreen extends Component {
       all: [],
       totalAmount: 0,
       categories: [],
-      accounts: []
+      accounts: [],
+      types: []
     }
   }
 
@@ -39,7 +40,13 @@ class HistoryScreen extends Component {
       .catch(res => this.setState({accounts: []}))
   }
 
-  filter(category_f, account_f, betweenDates, fromDate, toDate) {
+  loadTypes() {
+    this.props.route.params.getTypes()
+      .then(res => this.setState({types: res}))
+      .catch(res => this.setState({types: res}))
+  }
+
+  filter(category_f, account_f, betweenDates, fromDate, toDate, type) {
 
     const date = betweenDates ? {"from": fromDate, "to": toDate} : undefined
     const category = category_f === "cualquiera" ? undefined : category_f
@@ -50,6 +57,7 @@ class HistoryScreen extends Component {
       "filter": {
         "category": category,
         "account": account,
+        "type": type,
         "date": date
       }
     }
@@ -72,6 +80,7 @@ class HistoryScreen extends Component {
     this.loadTotalAmount();
     this.loadAccounts();
     this.loadCategories();
+    this.loadTypes();
   }
 
   render = () => {
@@ -90,7 +99,8 @@ class HistoryScreen extends Component {
             onAccept={this.filter.bind(this)}
             categories={this.state.categories}
             accounts={this.state.accounts}
-/>
+            types={this.state.types}
+          />
 
           <FlatList 
             style={styles.list}

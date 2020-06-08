@@ -21,8 +21,6 @@ const UserScreen = (props) => {
             </View>
   
             <View style={styles.body}>
-                <CustomButtom text='Ver gastos mensuales' onPress={() => {}} type="principal"/>
-                <CustomButtom text='Ver ingresos mensuales' onPress={() => {}} type="principal"/>
                 <CustomButtom text='Ver graficos' onPress={() => {}} type="principal"/>
                 <CustomButtom text='Cerrar sesion' buttonStyle={styles.logoutButton} onPress={() => logout()} type="principal"/>
             </View>
@@ -57,8 +55,9 @@ const styles = StyleSheet.create({
       fontWeight:'600',
     },
     body:{
+      paddingTop: 40,
       backgroundColor: "#52E0F6",
-      height:500,
+      height:400,
       alignItems:'center',
     },
     logoutButton: {

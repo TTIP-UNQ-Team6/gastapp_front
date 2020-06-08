@@ -14,6 +14,7 @@ const FilterComponent = (props) => {
     const [toDate, setToDate] = React.useState(new Date());
     const [category, setCategory] = React.useState("cualquiera");
     const [account, setAccount] = React.useState("cualquiera");
+    const [type, setType] = React.useState("");
 
     function changeFromDate(event) {
         if(event.type == "set") {
@@ -28,9 +29,14 @@ const FilterComponent = (props) => {
     }
 
     return (
-      <View>
-        <Modal isVisible={props.isVisible} onBackdropPress={() => props.close()}>
-          <View style={styles.container}>
+        <Modal isVisible={props.isVisible} onBackdropPress={() => props.close()} >
+        <View style={styles.container}>
+
+            <View style={styles.itemView}>
+                <Text style={styles.leftText}>Tipo:</Text>
+                <ListPickerComponent list={props.types} value={() => {return(type)}} onChange={setType} />
+            </View>
+
             <View style={styles.itemView}>
                 <Text style={styles.leftText}>Categoria:</Text>
                 <ListPickerComponent list={["cualquiera"].concat(props.categories)} value={() => {return(category)}} onChange={setCategory} />
@@ -65,21 +71,24 @@ const FilterComponent = (props) => {
             }
             
             <View style={styles.buttonsView}>
-                <CancelAcceptComponent onCancel={() => props.close()} onAccept={() => {props.onAccept(category, account, betweenDates, fromDate, toDate); props.close()}} />
+                <CancelAcceptComponent onCancel={() => props.close()} onAccept={() => {props.onAccept(category, account, betweenDates, fromDate, toDate, type); props.close()}} />
             </View>
           </View>
         </Modal>
-      </View>
     )
   }
 
   const styles = StyleSheet.create({
+    modal: {
+    },
       container: {
+          borderRadius: 20,
           backgroundColor: 'white',
-          padding: '2%'
+          padding: '2%',
+          flex: 0
       },
       buttonsView: {
-        height: '30%',
+        height: 120
       },
       itemView: {
         flexDirection: 'row',

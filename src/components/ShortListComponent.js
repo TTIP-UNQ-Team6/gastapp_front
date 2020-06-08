@@ -18,7 +18,7 @@ const ShortListComponent = (props) => {
                 />
             </View>
             <View style={styles.buttonView}>
-                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate(props.viewAllScreen, {user_email: props.user_email, getAll: props.getAll, getTotal: props.getTotal, editScreen: props.editScreen, update: props.update, getAccounts: props.getAccounts, getCategories: props.getCategories, filter: props.filter})}>
+                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate(props.viewAllScreen, {user_email: props.user_email, getAll: props.getAll, getTotal: props.getTotal, editScreen: props.editScreen, update: props.update, getAccounts: props.getAccounts, getCategories: props.getCategories, filter: props.filter, getTypes: props.getTypes})}>
                     <Text style={styles.buttonText} >
                         Ver todos
                     </Text>
