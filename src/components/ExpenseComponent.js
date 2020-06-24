@@ -22,7 +22,11 @@ const ExpenseComponent = (props) => {
 
             <ListPickerComponent iconName='exp-acc' onChange={props.onTypeChange} list={props.types} value={() => props.type} />
 
-            {props.type === "unico" ? <DatePickerComponent onChange={props.onDateChange} initialDate={props.initialDate} /> : <View/>}
+            {props.type === "unico" ? 
+                <DatePickerComponent onChange={props.onDateChange} initialDate={props.initialDate} /> 
+                : 
+                <View/>
+            }
 
             </ScrollView >
 

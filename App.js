@@ -131,14 +131,15 @@ export default () => {
     console.disableYellowBox = true;
 
     const [isLoading, setIsLogin] = React.useState(true);
-    const [user, setUser] = React.useState({
+    const [user, setUser] = React.useState(null);
+
+    const userForTest = {
         "_id": {
           "$oid": "5ec2fdc0899e474b23693dc6",
         },
         "email": "mauro@mauro.com",
-        "name": "Mauro",
-        "password": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-      });
+        "name": "Mauro"
+      }
 
     React.useEffect(() => {
         setTimeout(() => {
