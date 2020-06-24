@@ -12,13 +12,13 @@ const ShortListComponent = (props) => {
             <View style={styles.listView}>
                 <FlatList 
                     style={{padding: 0, margin: 0}}
-                    data={props.items} 
+                    data={props.items.slice(0, 3)} 
                     renderItem={({ item }) => <ItemList onSubmit={props.update} navigation={props.navigation} editScreen={props.editScreen} icon={true} item={item} containerStyle={styles.itemContainerStyle} titleStyle={styles.itemTitle} subtitleStyle={styles.itemSubtitle}></ItemList>}
                     keyExtractor={(item) => item._id.$oid}
                 />
             </View>
             <View style={styles.buttonView}>
-                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate(props.viewAllScreen, {user_email: props.user_email, getAll: props.getAll, getTotal: props.getTotal, editScreen: props.editScreen, update: props.update, getAccounts: props.getAccounts, getCategories: props.getCategories, filter: props.filter, getTypes: props.getTypes})}>
+                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate(props.viewAllScreen, {user_email: props.user_email, initialItems: props.items, editScreen: props.editScreen, update: props.update, getAccounts: props.getAccounts, getCategories: props.getCategories, filter: props.filter, getTypes: props.getTypes})}>
                     <Text style={styles.buttonText} >
                         Ver todos
                     </Text>

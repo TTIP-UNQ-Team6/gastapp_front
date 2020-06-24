@@ -10,7 +10,7 @@ const DatePickerComponent = (props) => {
             <View style={styles.iconView}>{getIcon("exp-date", 50)}</View>
 
             <TouchableOpacity onPress={() => setShow(true)} style={styles.buttonDate}>
-                <Text style={styles.textButtonDate}>{props.initialDate.toLocaleDateString()}</Text>
+                <Text style={styles.textButtonDate}>{props.initialDate.toLocaleDateString("es-AR")}</Text>
             </TouchableOpacity>
 
             {show && <DateTimePicker

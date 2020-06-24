@@ -14,7 +14,7 @@ const FilterComponent = (props) => {
     const [toDate, setToDate] = React.useState(new Date());
     const [category, setCategory] = React.useState("cualquiera");
     const [account, setAccount] = React.useState("cualquiera");
-    const [type, setType] = React.useState("");
+    const [type, setType] = React.useState("unico");
 
     function changeFromDate(event) {
         if(event.type == "set") {

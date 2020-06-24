@@ -18,14 +18,9 @@ class HistoryScreen extends Component {
     }
   }
 
-  loadAll() {
-    this.props.route.params.getAll(this.state.user_email)
-    .then(res => this.setState({all: res}))
-    .catch(e => this.setState({all: []}));
-  }
-
   loadTotalAmount() {
-    this.props.route.params.getTotal(this.state.user_email).then(res => {this.setState({totalAmount: res.total})}).catch(e => this.setState({totalAmount: 0}));
+    const total = this.state.all.reduce((parcial, i) => parcial + i.amount, 0);
+    this.setState({totalAmount: total});
   }
 
   loadCategories() {
@@ -46,11 +41,12 @@ class HistoryScreen extends Component {
       .catch(res => this.setState({types: res}))
   }
 
-  filter(category_f, account_f, betweenDates, fromDate, toDate, type) {
+  filter(category_f, account_f, betweenDates, fromDate, toDate, type_f) {
 
-    const date = betweenDates ? {"from": fromDate, "to": toDate} : undefined
-    const category = category_f === "cualquiera" ? undefined : category_f
-    const account = account_f === "cualquiera" ? undefined : account_f
+    const date = betweenDates ? {"from": fromDate, "to": toDate} : undefined;
+    const category = category_f === "cualquiera" ? undefined : category_f;
+    const account = account_f === "cualquiera" ? undefined : account_f;
+    const type = type_f ? type_f : "unico";
 
     const body = {
       "user_email": this.state.user_email,
@@ -67,7 +63,7 @@ class HistoryScreen extends Component {
   }
 
   update() {
-    this.loadAll();
+    this.filter();
     this.props.route.params.update();
   }
 
@@ -76,8 +72,7 @@ class HistoryScreen extends Component {
   }
 
   componentDidMount() {
-    this.loadAll();
-    this.loadTotalAmount();
+    this.setState({all: this.props.route.params.initialItems}, this.loadTotalAmount)
     this.loadAccounts();
     this.loadCategories();
     this.loadTypes();
