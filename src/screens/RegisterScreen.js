@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, Image } from 'react-native';
-import TextWithIconComponent from '../components/TextWithIconComponent'
+import TextWithIconComponent from '../components/TextWithIconComponent';
 import CustomButtom from '../components/CustomButton';
 import { View } from 'native-base';
 import { AuthContext } from '../context/AuthContext';
 import { ErrorComponent } from '../components/ErrorComponent';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { validateEmail, validatePassword, validateUsername } from '../utils/Validates';
+
 
 export function RegisterScreen({ navigation }) {
 
@@ -16,35 +18,9 @@ export function RegisterScreen({ navigation }) {
     const [email, setEmail] = React.useState('');
 
     function validateRegister() {
-        if (!validateUsername()) {
-            setError("El nombre debe tener entre 2 y 15 digitos.");
-            return;
+        if(validateEmail(email, setError) && validateUsername(username, setError) && validatePassword(password, setError)) {
+            register(username, email, password, setError);
         }
-        if (!validateEmail()) {
-            setError("Por favor, ingrese un mail valido.");
-            return;
-        }
-        if (!validatePassword()) {
-            setError("La contraseña debe tener entre 5 y 20 digitos.");
-            return;
-        }
-
-        register(username, email, password, setError)
-    }
-
-    function validateEmail() {
-        var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+[^<>()\.,;:\s@\"]{2,})$/;
-        return re.test(email);
-    }
-
-    function validatePassword() {
-        const re = /^.{5,20}/;
-        return re.test(password);
-    }
-
-    function validateUsername() {
-        const re = /^.{2,15}/;
-        return re.test(username);
     }
 
     return (
