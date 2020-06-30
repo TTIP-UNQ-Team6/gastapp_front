@@ -6,13 +6,20 @@ import { View } from 'native-base';
 import { AuthContext } from '../context/AuthContext';
 import { ErrorComponent } from '../components/ErrorComponent';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { validateEmail } from '../utils/Validates';
 
 export function LoginScreen({ navigation }) {
 
     const { login } = React.useContext(AuthContext);
     const [error, setError] = React.useState('');
-    const [username, setUsername] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+
+    function validateLogin() {
+        if(validateEmail(email, setError)) {
+            login(email, password, setError);
+        }
+    }
 
     return (
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} contentContainerStyle={styles.container} scrollEnabled={false} style={styles.view}>
@@ -22,11 +29,11 @@ export function LoginScreen({ navigation }) {
             
             <ErrorComponent error={error} />
 
-            <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} placeholder="Usuario" backgroundColor={'#46C4D7'} onChange={setUsername} />
+            <TextWithIconComponent iconName="user" iconSize={50} iconColor={'#6F6F6F'} placeholder="Email" backgroundColor={'#46C4D7'} onChange={setEmail} />
             <TextWithIconComponent iconName="password" iconSize={50} iconColor={'#6F6F6F'} password={true} placeholder="Contraseña" backgroundColor={'#48C7DB'} onChange={setPassword} />
         
             <View style={styles.buttonsView}>
-                <CustomButtom text='Iniciar sesion' onPress={() => login(username, password, setError)} type="principal"/>
+                <CustomButtom text='Iniciar sesion' onPress={() => validateLogin()} type="principal"/>
                 <CustomButtom text='Registrarse' onPress={() => navigation.navigate("RegisterScreen")} type="secondary"/>
             </View>
 
