@@ -38,7 +38,9 @@
     "react-native-wheel-picker": "^1.2.0",
     "react-navigation": "^4.3.8",
     "react-navigation-stack": "^2.3.13",
-    "rmc-picker": "^5.0.10"
+    "rmc-picker": "^5.0.10",
+    "victory-native": "^35.0.0",
+    "react-native-svg": "11.0.1"
   },
   "jest": {
     "preset": "jest-expo",

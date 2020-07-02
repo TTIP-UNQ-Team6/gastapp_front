@@ -6,6 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 const UserScreen = (props) => {
 
     const user = props.route.params.user;
+    const navigation = props.route.params.navigation;
     const { logout } = React.useContext(AuthContext);
 
     return (
@@ -21,7 +22,7 @@ const UserScreen = (props) => {
             </View>
   
             <View style={styles.body}>
-                <CustomButtom text='Ver graficos' onPress={() => {}} type="principal"/>
+                <CustomButtom text='Ver graficos' onPress={() => navigation.navigate('GraphsScreen', {user: user})} type="principal"/>
                 <CustomButtom text='Cerrar sesion' buttonStyle={styles.logoutButton} onPress={() => logout()} type="principal"/>
             </View>
         </View>

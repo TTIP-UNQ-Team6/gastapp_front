@@ -10,7 +10,7 @@ const HeaderComponent = (props) => {
   return (
     <View style={styles.header}>
         <Text style={styles.text}> {title} </Text>
-        <TouchableHighlight style={styles.icon} onPress={() => navigation.navigate('UserScreen', {user: props.user})} >{getIcon('account', 50, '#666e')}</TouchableHighlight>
+        <TouchableHighlight style={styles.icon} onPress={() => navigation.navigate('UserScreen', {user: props.user, navigation: navigation})} >{getIcon('account', 50, '#666e')}</TouchableHighlight>
     </View>
     );  
 }
