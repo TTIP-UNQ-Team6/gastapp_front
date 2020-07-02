@@ -5,7 +5,7 @@ import TypePickerComponent from '../components/TypePickerComponent';
 import { filterExpenses, filterIncomes } from '../gastappService';
 import PieChart from '../components/Charts/PieChart';
 import LineChart from '../components/Charts/LineChart';
-import Chart from '../components/Charts/Chart';
+import BarChart from '../components/Charts/BarChart';
 
 
 const GraphScreen = (props) => {
@@ -49,7 +49,7 @@ const GraphScreen = (props) => {
                 <View>
                     <PieChart list={list} />
                     <LineChart list={list} />
-                    <Chart list={list} />
+                    <BarChart list={list} />
                 </View>
             :
                 <View />

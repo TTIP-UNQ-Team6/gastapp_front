@@ -15,14 +15,14 @@ const LineChart = (props) => {
     function processData() {
         const daysList = createEmpyDaysList();
 
-        const asd = props.list
+        const temp = props.list
             .map(elem => { return({"day": new Date(elem.date.$date).getDay(), "amount": elem.amount}) })
             .reduce((acc, curr) => {
                 acc[curr.day] ? acc[curr.day]+= curr.amount : acc[curr.day] = curr.amount;
                 return acc;
             }, {});
 
-        for (let [key, value] of Object.entries(asd)) {
+        for (let [key, value] of Object.entries(temp)) {
             daysList[key - 1] = {"x": key, "y": value};
         }
 
@@ -35,8 +35,6 @@ const LineChart = (props) => {
 
     return (
         <View style={styles.view}>
-            
-            {console.log(list)}
             <VictoryChart domain={{x: [0, 31], y: [0, 20000]}} padding={{left: 55, right: 55, top: 15, bottom: 5}} >
             <VictoryLine
                 style={{
