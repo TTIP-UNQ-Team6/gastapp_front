@@ -19,8 +19,6 @@ const BarChart = (props) => {
             result.push({"x": key, "y": value });
         }
 
-        console.log("ACA MIRAME: ", result)
-
         setList(result);
     }
 
