@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { VictoryPie, VictoryContainer } from "victory-native";
+import { VictoryPie } from "victory-native";
 
 const PieChart = (props) => {
     const [list, setList] = useState();
@@ -18,10 +18,6 @@ const PieChart = (props) => {
         Object.keys(elemsPerCat).forEach(cat => result.push({"x": cat, "y": elemsPerCat[cat] }));
         setList(result);
     }
-
-    useEffect(() => {
-        console.log("LISTA: ", list);
-    }, [list])
 
     useEffect(() => {
         processData();
