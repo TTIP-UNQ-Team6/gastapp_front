@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { StyleSheet, Picker, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import DatePicker from 'react-native-modern-datepicker';
 
 const months = {
-  1: "Enero",
-  2: "Febrero",
-  3: "Marzo",
-  4: "Abril",
-  5: "Mayo",
-  6: "Junio",
-  7: "Julio",
-  8: "Agosto",
-  9: "Septiembre",
-  10: "Octubre",
-  11: "Noviembre",
-  12: "Diciembre"
+  0: "Enero",
+  1: "Febrero",
+  2: "Marzo",
+  3: "Abril",
+  4: "Mayo",
+  5: "Junio",
+  6: "Julio",
+  7: "Agosto",
+  8: "Septiembre",
+  9: "Octubre",
+  10: "Noviembre",
+  11: "Diciembre"
 }
 
 const MonthYearPickerComponent = (props) => {
@@ -43,7 +43,7 @@ const MonthYearPickerComponent = (props) => {
           mode="monthYear"
           selectorStartingYear={2000}
           onMonthYearChange={selectedDate => handleChangeDate(selectedDate)}
-          current={date.getFullYear() + "/" + date.getMonth() }
+          current={date.getFullYear() + "/" + (date.getMonth() + 1) }
         />
       </Modal>
 
