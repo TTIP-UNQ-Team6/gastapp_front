@@ -24,7 +24,7 @@ const MonthYearPickerComponent = (props) => {
 
   function handleChangeDate(date) {
     const [year, month] = date.split(" ");
-    const newDate = new Date(year, month, 1);
+    const newDate = new Date(year, month - 1, 1);
     setDate(newDate);
     props.onChangeDate(newDate);
     setShowCalendar(false);
