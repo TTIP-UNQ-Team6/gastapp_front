@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getExpenseCategories, addExpense, getExpenseAccounts, getExpenseTypes } from '../gastappService';
 import ExpenseComponent from '../components/ExpenseComponent';
+import { validateAmount } from '../utils/Validates';
 
 class AddExpenseScreen extends Component {
 
@@ -18,6 +19,7 @@ class AddExpenseScreen extends Component {
             type: '',
             date: new Date(Date.now()),
             description: "",
+            error: "",
         }
     }
 
@@ -66,6 +68,10 @@ class AddExpenseScreen extends Component {
         this.setState({type: type})
     }
 
+    changeError(error) {
+        this.setState({error: error});
+    }
+
     buildExpense() {
         const expense = {
             "user_email": this.state.user_email,
@@ -82,10 +88,12 @@ class AddExpenseScreen extends Component {
 
     submitExpense() {
         const expense = this.buildExpense();
-        addExpense(expense).then(res => {
-            this.props.route.params.updateScreen()
-            this.state.navigation.goBack();
-        })
+        if(validateAmount(expense.amount, this.changeError.bind(this))) {
+            addExpense(expense).then(res => {
+                this.props.route.params.updateScreen()
+                this.state.navigation.goBack();
+            })
+        }
     }
 
     cancelExpense() {
@@ -102,6 +110,7 @@ class AddExpenseScreen extends Component {
                 onTypeChange={this.changeType.bind(this)} types={this.state.types} type={this.state.type}
                 onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
                 onAccept={this.submitExpense.bind(this)} onCancel={this.cancelExpense.bind(this)}
+                error={this.state.error}
             />
         );
     }

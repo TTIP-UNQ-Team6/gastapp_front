@@ -27,3 +27,13 @@ export const validateUsername = (username, setError) => {
         setError("El nombre debe tener entre 2 y 15 digitos.")
     }
 }
+
+export const validateAmount = (amount, setError) => {
+    const re = /^(0*[1-9][0-9]*)$/;
+
+    if(re.test(amount)) {
+        return(true)
+    } else {
+        setError("El monto debe ser numerico y mayor a 0.")
+    }
+}

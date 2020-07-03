@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { getExpenseCategories, editExpense, deleteExpense, getExpenseAccounts, getExpenseTypes } from '../gastappService';
 import ExpenseComponent from '../components/ExpenseComponent';
 import DeleteIconComponent from '../components/DeleteIconComponent';
-import { View } from 'native-base';
+import { validateAmount } from '../utils/Validates';
 
 class EditExpenseScreen extends Component {
     constructor(props) {
@@ -22,6 +22,7 @@ class EditExpenseScreen extends Component {
             type: props.route.params.item.etype,
             date: new Date(props.route.params.item.date.$date),
             description: props.route.params.item.description,
+            error: "",
         }
     }
 
@@ -79,6 +80,10 @@ class EditExpenseScreen extends Component {
         this.setState({type: type})
     }
 
+    changeError(error) {
+        this.setState({error: error});
+    }
+
     buildExpense() {
         const expense = {
             "id": this.state.id,
@@ -101,9 +106,11 @@ class EditExpenseScreen extends Component {
 
     submitEditExpense() {
         const expense = this.buildExpense();
-        editExpense(expense).then(res => {
-            this.goBack();
-        })
+        if(validateAmount(expense.amount, this.changeError.bind(this))) {
+            editExpense(expense).then(res => {
+                this.goBack();
+            })
+        }
     }
 
     cancelExpense() {
@@ -121,6 +128,7 @@ class EditExpenseScreen extends Component {
                     onTypeChange={this.changeType.bind(this)} types={this.state.types} type={this.state.type}
                     onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
                     onAccept={this.submitEditExpense.bind(this)} onCancel={this.cancelExpense.bind(this)}
+                    error={this.state.error}
                 />
             </View>
         );

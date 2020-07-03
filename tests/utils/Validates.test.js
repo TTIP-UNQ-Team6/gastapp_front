@@ -1,4 +1,4 @@
-import { validateEmail, validateUsername, validatePassword } from '../../src/utils/Validates';
+import { validateEmail, validateUsername, validatePassword, validateAmount } from '../../src/utils/Validates';
 
 let setErrorMock;
 
@@ -49,3 +49,21 @@ describe("Email validation", () => {
     })
 }) 
 
+describe("Email validation", () => {
+    it("should be true", () => {
+        const validAmount = "120";
+        expect(validateAmount(validAmount, setErrorMock)).toBeTruthy();
+    })
+
+    it("should be false", () => {
+        const invalidAmount = "0";
+        expect(validateAmount(invalidAmount, setErrorMock)).toBeFalsy();
+        expect(setErrorMock).toHaveBeenCalled();
+    })
+
+    it("should be false", () => {
+        const invalidAmount = "amount";
+        expect(validateAmount(invalidAmount, setErrorMock)).toBeFalsy();
+        expect(setErrorMock).toHaveBeenCalled();
+    })
+}) 

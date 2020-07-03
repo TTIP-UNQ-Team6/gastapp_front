@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { getIncomeCategories, editIncome, deleteIncome, getIncomeAccounts, getExpenseTypes } from '../gastappService';
 import IncomeComponent from '../components/IncomeComponent';
 import DeleteIconComponent from '../components/DeleteIconComponent';
-import { View } from 'native-base';
+import { validateAmount } from '../utils/Validates';
 
 class EditIncomeScreen extends Component {
     constructor(props) {
@@ -22,6 +22,7 @@ class EditIncomeScreen extends Component {
             type: props.route.params.item.itype,
             date: new Date(props.route.params.item.date.$date),
             description: props.route.params.item.description,
+            error: "",
         }
     }
 
@@ -80,6 +81,10 @@ class EditIncomeScreen extends Component {
         this.setState({type: type})
     }
 
+    changeError(error) {
+        this.setState({error: error});
+    }
+
     buildIncome() {
         const income = {
             "id": this.state.id,
@@ -102,9 +107,11 @@ class EditIncomeScreen extends Component {
 
     submitEditIncome() {
         const income = this.buildIncome();
-        editIncome(income).then(res => {
-            this.goBack();
-        })
+        if(validateAmount(expense.amount, this.changeError.bind(this))) {
+            editIncome(income).then(res => {
+                this.goBack();
+            })
+        }
     }
 
     cancelIncome() {
@@ -122,6 +129,7 @@ class EditIncomeScreen extends Component {
                     onTypeChange={this.changeType.bind(this)} types={this.state.types} type={this.state.type}
                     onDateChange={this.changeDate.bind(this)} initialDate={this.state.date}
                     onAccept={this.submitEditIncome.bind(this)} onCancel={this.cancelIncome.bind(this)}
+                    error={this.state.error}
                 />
             </View>
         );

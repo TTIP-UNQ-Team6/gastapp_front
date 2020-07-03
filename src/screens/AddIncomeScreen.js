@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getIncomeCategories, addIncome, getIncomeAccounts, getIncomeTypes } from '../gastappService';
 import IncomeComponent from '../components/IncomeComponent';
+import { validateAmount } from '../utils/Validates';
 
 class AddIncomeScreen extends Component {
 
@@ -18,6 +19,7 @@ class AddIncomeScreen extends Component {
             amount: 0,
             date: new Date(Date.now()),
             description: "",
+            error: "",
         }
     }
 
@@ -63,24 +65,30 @@ class AddIncomeScreen extends Component {
     }
 
     changeType(type) {
-        this.setState({type: type})
+        this.setState({type: type});
+    }
+
+    changeError(error) {
+        this.setState({error: error});
     }
 
     submitIncome() {
-        const income = {
-            "user_email": this.state.user_email,
-            "amount": this.state.amount,
-            "category": this.state.category,
-            "description": this.state.description,
-            "account": this.state.account,
-            "type": this.state.type,
-            "date": this.state.date.toISOString()
-        }
+        if(validateAmount(this.state.amount, this.changeError.bind(this))) {
+            const income = {
+                "user_email": this.state.user_email,
+                "amount": this.state.amount,
+                "category": this.state.category,
+                "description": this.state.description,
+                "account": this.state.account,
+                "type": this.state.type,
+                "date": this.state.date.toISOString()
+            }
 
-        addIncome(income).then(res => {
-            this.props.route.params.updateScreen()
-            this.state.navigation.goBack();
-        })
+            addIncome(income).then(res => {
+                this.props.route.params.updateScreen()
+                this.state.navigation.goBack();
+            })
+        }
     }
 
     cancelIncome() {
@@ -97,6 +105,7 @@ class AddIncomeScreen extends Component {
                 onTypeChange={this.changeType.bind(this)} types={this.state.types} type={this.state.type}
                 onAccountChange={this.changeAccount.bind(this)} accounts={this.state.accounts} account={this.state.account}
                 onAccept={this.submitIncome.bind(this)} onCancel={this.cancelIncome.bind(this)}
+                error={this.state.error}
             />
         );
     }

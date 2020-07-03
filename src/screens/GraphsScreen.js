@@ -6,6 +6,7 @@ import { filterExpenses, filterIncomes } from '../gastappService';
 import PieChart from '../components/Charts/PieChart';
 import LineChart from '../components/Charts/LineChart';
 import BarChart from '../components/Charts/BarChart';
+import EmptyComponent from '../components/EmptyComponent';
 
 
 const GraphScreen = (props) => {
@@ -52,7 +53,7 @@ const GraphScreen = (props) => {
                     <BarChart list={list} />
                 </View>
             :
-                <View />
+                <EmptyComponent type={type} />
         }
 
         </ScrollView >

@@ -4,6 +4,7 @@ import TextWithIconComponent from './TextWithIconComponent';
 import CancelAcceptComponent from './CancelAcceptComponent';
 import DatePickerComponent from './DatePickerComponent';
 import ListPickerComponent from './ListPickerComponent';
+import { ErrorComponent } from './ErrorComponent';
 
 const IncomeComponent = (props) => {
     return (
@@ -11,6 +12,7 @@ const IncomeComponent = (props) => {
             
         <ScrollView style={styles.inisideView}>
 
+            <ErrorComponent error={props.error}/>
 
             <TextWithIconComponent iconName="exp-amount" iconSize={50} keyboardType='numeric' placeholder="Monto" initialValue={props.initialAmount + ""} onChange={props.onAmountChange} />
 

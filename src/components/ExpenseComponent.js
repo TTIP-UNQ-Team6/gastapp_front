@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import TextWithIconComponent from './TextWithIconComponent';
 import CancelAcceptComponent from './CancelAcceptComponent';
 import DatePickerComponent from './DatePickerComponent';
 import ListPickerComponent from './ListPickerComponent';
+import { ErrorComponent } from './ErrorComponent';
 
 const ExpenseComponent = (props) => {
+
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.view}>
             
         <ScrollView style={styles.inisideView}>
 
+            <ErrorComponent error={props.error}/>
 
             <TextWithIconComponent iconName="exp-amount" iconSize={50} keyboardType='numeric' placeholder="Monto" initialValue={props.initialAmount + ""} onChange={props.onAmountChange} />
 
