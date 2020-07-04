@@ -49,7 +49,7 @@ describe("Email validation", () => {
     })
 }) 
 
-describe("Email validation", () => {
+describe("Amount validation", () => {
     it("should be true", () => {
         const validAmount = "120";
         expect(validateAmount(validAmount, setErrorMock)).toBeTruthy();
