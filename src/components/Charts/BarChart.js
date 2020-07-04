@@ -5,8 +5,8 @@ import { VictoryBar, VictoryChart } from "victory-native";
 const BarChart = (props) => {
     const [list, setList] = useState();
 
-    function processData() {
-        const amountPerCat = props.list
+    function processData(data) {
+        const amountPerCat = data
             .map(elem => { return({"cat": elem.category.substring(0, 4), "amount": elem.amount}) })
             .reduce((acc, curr) => {
                 acc[curr.cat] ? acc[curr.cat] + curr.amount : acc[curr.cat] = curr.amount;
@@ -23,8 +23,8 @@ const BarChart = (props) => {
     }
 
     useEffect(() => {
-        processData();
-    }, [])
+        processData(props.list);
+    }, [props.list])
 
     return (
         <View style={styles.view}>

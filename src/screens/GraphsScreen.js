@@ -8,7 +8,6 @@ import LineChart from '../components/Charts/LineChart';
 import BarChart from '../components/Charts/BarChart';
 import EmptyComponent from '../components/EmptyComponent';
 
-
 const GraphScreen = (props) => {
     const user = props.route.params.user;
     const [list, setList] = useState([]);
@@ -26,8 +25,8 @@ const GraphScreen = (props) => {
             "user_email": user.email,
             "filter": {
                 "date": {
-                    "from": new Date(year, month - 1, 1),
-                    "to": new Date(year, month, 1)
+                    "from": new Date(year, month, 1),
+                    "to": new Date(year, month + 1, 1)
                 },
                 "type": "unico",
             }

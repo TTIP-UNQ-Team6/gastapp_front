@@ -58,8 +58,8 @@ class HistoryScreen extends Component {
       }
     }
     this.props.route.params.filter(body)
-      .then(res => this.setState({all: res.data}))
-      .catch(res => this.setState({all: []}))
+      .then(res => this.setState({all: res.data}, this.loadTotalAmount))
+      .catch(res => this.setState({all: []}, this.loadTotalAmount))
   }
 
   update() {

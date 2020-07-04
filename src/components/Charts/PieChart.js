@@ -3,10 +3,10 @@ import { View, StyleSheet } from 'react-native';
 import { VictoryPie } from "victory-native";
 
 const PieChart = (props) => {
-    const [list, setList] = useState();
+    const [list, setList] = useState([]);
 
-    function processData() {
-        const elemsPerCat = props.list
+    function processData(data) {
+        const elemsPerCat = data
             .map(elem => { return(elem.category.substring(0, 9)) })
             .reduce((acc, curr) => {
                 acc[curr] ? acc[curr]++ : acc[curr] = 1;
@@ -20,8 +20,8 @@ const PieChart = (props) => {
     }
 
     useEffect(() => {
-        processData();
-    }, [])
+        processData(props.list);
+    }, [props.list])
 
     return (
         <View style={styles.view}>

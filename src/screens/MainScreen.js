@@ -31,8 +31,8 @@ export default class MainScreen extends Component {
             "filter": {
               "type": "unico",
               "date": {
-                  "from": new Date(year, month - 1, 1),
-                  "to": new Date(year, month, 1)
+                  "from": new Date(year, month, 1),
+                  "to": new Date(year, month + 1, 1)
               }
             }
           }

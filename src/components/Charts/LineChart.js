@@ -12,10 +12,10 @@ const LineChart = (props) => {
         return Array(parseInt(totalDays)).fill().map((_, i) => {return {"x": i + 1 + "", "y": 0} });
     }
 
-    function processData() {
+    function processData(data) {
         const daysList = createEmpyDaysList();
 
-        const temp = props.list
+        const temp = data
             .map(elem => { return({"day": new Date(elem.date.$date).getDay(), "amount": elem.amount}) })
             .reduce((acc, curr) => {
                 acc[curr.day] ? acc[curr.day]+= curr.amount : acc[curr.day] = curr.amount;
@@ -30,8 +30,8 @@ const LineChart = (props) => {
     }
 
     useEffect(() => {
-        processData();
-    }, [])
+        processData(props.list);
+    }, [props.list])
 
     return (
         <View style={styles.view}>
