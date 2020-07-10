@@ -17,87 +17,93 @@ const FilterComponent = (props) => {
     const [type, setType] = React.useState("unico");
 
     function changeFromDate(event) {
-        if(event.type == "set") {
+        if (event.type == "set") {
             setFromDate(new Date(event.nativeEvent.timestamp));
         }
     }
 
     function changeToDate(event) {
-        if(event.type == "set") {
+        if (event.type == "set") {
             setToDate(new Date(event.nativeEvent.timestamp));
         }
     }
 
     return (
         <Modal isVisible={props.isVisible} onBackdropPress={() => props.close()} >
-        <View style={styles.container}>
+            <View style={styles.container}>
 
-            <View style={styles.itemView}>
-                <Text style={styles.leftText}>Tipo:</Text>
-                <ListPickerComponent list={props.types} value={() => {return(type)}} onChange={setType} />
-            </View>
-
-            <View style={styles.itemView}>
-                <Text style={styles.leftText}>Categoria:</Text>
-                <ListPickerComponent list={["cualquiera"].concat(props.categories)} value={() => {return(category)}} onChange={setCategory} />
-            </View>
-
-            <View style={styles.itemView}>
-                <Text style={styles.leftText}>Cuenta:</Text>
-                <ListPickerComponent list={["cualquiera"].concat(props.accounts)} value={() => {return(account)}} onChange={setAccount} />
-            </View>
-
-            <CheckBox
-                center
-                title='Entre fechas'
-                checked={betweenDates}
-                onPress={() => setBetweenDates(!betweenDates)}
-            />
-
-            {betweenDates ? 
-                <View>
-                    <View style={styles.itemView}>
-                        <Text style={styles.leftText}>Desde:</Text>
-                        <DatePickerComponent initialDate={fromDate} onChange={changeFromDate} />
-                    </View>
-
-                    <View style={styles.itemView}>
-                        <Text style={styles.leftText}>Hasta:</Text>
-                        <DatePickerComponent initialDate={toDate} onChange={changeToDate} />
-                    </View>
+                <View style={styles.itemView}>
+                    <Text style={styles.leftText}>Tipo:</Text>
+                    <ListPickerComponent list={props.types} value={() => { return (type) }} onChange={setType} />
                 </View>
-                :
-                <View/>
-            }
-            
-            <View style={styles.buttonsView}>
-                <CancelAcceptComponent onCancel={() => props.close()} onAccept={() => {props.onAccept(category, account, betweenDates, fromDate, toDate, type); props.close()}} />
+
+                <View style={styles.itemView}>
+                    <Text style={styles.leftText}>Categoria:</Text>
+                    <ListPickerComponent list={["cualquiera"].concat(props.categories)} value={() => { return (category) }} onChange={setCategory} />
+                </View>
+
+                <View style={styles.itemView}>
+                    <Text style={styles.leftText}>Cuenta:</Text>
+                    <ListPickerComponent list={["cualquiera"].concat(props.accounts)} value={() => { return (account) }} onChange={setAccount} />
+                </View>
+
+                {type === 'unico' ?
+                    <View>
+                        <CheckBox
+                            center
+                            title='Entre fechas'
+                            checked={betweenDates}
+                            onPress={() => setBetweenDates(!betweenDates)}
+                        />
+
+                        {betweenDates ?
+                            <View>
+                                <View style={styles.itemView}>
+                                    <Text style={styles.leftText}>Desde:</Text>
+                                    <DatePickerComponent initialDate={fromDate} onChange={changeFromDate} />
+                                </View>
+
+                                <View style={styles.itemView}>
+                                    <Text style={styles.leftText}>Hasta:</Text>
+                                    <DatePickerComponent initialDate={toDate} onChange={changeToDate} />
+                                </View>
+                            </View>
+                            :
+                            <View />
+                        }
+                    </View>
+                    :
+                    <View />
+                }
+
+                <View style={styles.buttonsView}>
+                    <CancelAcceptComponent onCancel={() => props.close()} onAccept={() => { props.onAccept(category, account, betweenDates, fromDate, toDate, type); props.close() }} />
+                </View>
             </View>
-          </View>
         </Modal>
     )
-  }
+}
 
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     modal: {
     },
-      container: {
-          borderRadius: 20,
-          backgroundColor: 'white',
-          padding: '2%',
-          flex: 0
-      },
-      buttonsView: {
+    container: {
+        borderRadius: 20,
+        backgroundColor: 'white',
+        padding: '2%',
+        flex: 0
+    },
+    buttonsView: {
         height: 120
-      },
-      itemView: {
+    },
+    itemView: {
         flexDirection: 'row',
-      },
-      leftText: {
+    },
+    leftText: {
         width: '22%',
         fontSize: 15,
         textAlignVertical: 'center',
-      }
-  });
+    }
+});
 
-  export default FilterComponent;
+export default FilterComponent;

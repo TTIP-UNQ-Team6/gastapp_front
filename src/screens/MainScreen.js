@@ -51,7 +51,7 @@ export default class MainScreen extends Component {
                 <HeaderComponent navigation={this.state.navigation} user={this.state.user} />
                 <ScrollView>
                     <MonthYearPickerComponent onChangeDate={this.loadAll.bind(this)} />
-                    <BalanceComponent incomeAmount={this.state.expenses.reduce((parcial, i) => parcial + i.amount, 0)} expenseAmount={this.state.incomes.reduce((parcial, i) => parcial + i.amount, 0)} />
+                    <BalanceComponent expenseAmount={this.state.expenses.reduce((parcial, i) => parcial + i.amount, 0)} incomeAmount={this.state.incomes.reduce((parcial, i) => parcial + i.amount, 0)} />
                     <ShortListComponent title="Ultimos gastos" update={this.loadAll.bind(this)} navigation={this.state.navigation} editScreen={"EditExpenseScreen"} items={this.state.expenses} viewAllScreen={"ExpensesScreen"} getAll={getAllExpenses} getTotal={getTotalExpensesAmount} getAccounts={getExpenseAccounts} getCategories={getExpenseCategories} filter={filterExpenses} user_email={this.state.user.email} getTypes={getExpenseTypes} />
                     <ShortListComponent title="Ultimos ingresos" update={this.loadAll.bind(this)} navigation={this.state.navigation} editScreen={"EditIncomeScreen"} items={this.state.incomes} viewAllScreen={"IncomesScreen"} getAll={getAllIncomes} getTotal={getTotalIncomesAmount} getAccounts={getIncomeAccounts} getCategories={getIncomeCategories} filter={filterIncomes} user_email={this.state.user.email} getTypes={getIncomeTypes} />
                 </ScrollView>

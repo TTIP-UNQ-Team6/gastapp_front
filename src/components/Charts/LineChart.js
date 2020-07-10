@@ -35,7 +35,7 @@ const LineChart = (props) => {
 
     return (
         <View style={styles.view}>
-            <VictoryChart domain={{x: [0, 31], y: [0, 20000]}} padding={{left: 55, right: 55, top: 15, bottom: 5}} >
+            <VictoryChart domain={{x: [0, 31]}} padding={{left: 55, right: 55, top: 15, bottom: 5}} >
             <VictoryLine
                 style={{
                     data: { stroke: "#c43a31" },

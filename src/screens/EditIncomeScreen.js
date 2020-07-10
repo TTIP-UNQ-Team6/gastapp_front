@@ -107,7 +107,7 @@ class EditIncomeScreen extends Component {
 
     submitEditIncome() {
         const income = this.buildIncome();
-        if(validateAmount(expense.amount, this.changeError.bind(this))) {
+        if(validateAmount(income.amount, this.changeError.bind(this))) {
             editIncome(income).then(res => {
                 this.goBack();
             })
